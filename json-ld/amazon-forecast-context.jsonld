@@ -1,0 +1,73 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "forecast": "https://aws.amazon.com/forecast/vocabulary/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Dataset": "forecast:Dataset",
+    "Predictor": "forecast:Predictor",
+    "Forecast": "forecast:Forecast",
+    "DatasetGroup": "forecast:DatasetGroup",
+    "Tag": "schema:PropertyValue",
+    "DatasetArn": {
+      "@id": "forecast:datasetArn",
+      "@type": "xsd:string"
+    },
+    "DatasetName": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "Domain": {
+      "@id": "forecast:domain",
+      "@type": "xsd:string"
+    },
+    "DatasetType": {
+      "@id": "forecast:datasetType",
+      "@type": "xsd:string"
+    },
+    "DataFrequency": {
+      "@id": "forecast:dataFrequency",
+      "@type": "xsd:string"
+    },
+    "PredictorArn": {
+      "@id": "forecast:predictorArn",
+      "@type": "xsd:string"
+    },
+    "PredictorName": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "ForecastHorizon": {
+      "@id": "forecast:forecastHorizon",
+      "@type": "xsd:integer"
+    },
+    "ForecastArn": {
+      "@id": "forecast:forecastArn",
+      "@type": "xsd:string"
+    },
+    "ForecastName": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "Status": {
+      "@id": "forecast:status",
+      "@type": "xsd:string"
+    },
+    "CreationTime": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "LastModificationTime": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    },
+    "Key": {
+      "@id": "schema:propertyID",
+      "@type": "xsd:string"
+    },
+    "Value": {
+      "@id": "schema:value",
+      "@type": "xsd:string"
+    }
+  }
+}

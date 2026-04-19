@@ -1,0 +1,175 @@
+naftiko: 1.0.0-alpha1
+info:
+  label: Amazon Forecast Time Series Prediction
+  description: 'Manage end-to-end time-series forecasting pipelines: datasets, predictors, and forecast generation.'
+  tags:
+  - Forecasting
+  - Machine Learning
+  - Time Series
+  - Demand Planning
+  - AWS
+binds:
+- namespace: env
+  keys:
+    AWS_ACCESS_KEY_ID: AWS_ACCESS_KEY_ID
+    AWS_SECRET_ACCESS_KEY: AWS_SECRET_ACCESS_KEY
+    AWS_REGION: AWS_REGION
+capability:
+  consumes:
+  - namespace: forecast
+    ref: capabilities/shared/forecast.yaml
+  exposes:
+  - type: rest
+    port: 8080
+  - type: mcp
+    port: 9090
+  tools:
+  - name: createDataset
+    description: Create an Amazon Forecast dataset
+    inputSchema:
+      type: object
+      properties:
+        DatasetName:
+          type: string
+        Domain:
+          type: string
+        DatasetType:
+          type: string
+        DataFrequency:
+          type: string
+        Schema:
+          type: object
+      required:
+      - DatasetName
+      - Domain
+      - DatasetType
+      - Schema
+  - name: listDatasets
+    description: List all Forecast datasets
+    inputSchema:
+      type: object
+      properties:
+        maxResults:
+          type: integer
+        nextToken:
+          type: string
+  - name: describeDataset
+    description: Describe a Forecast dataset
+    inputSchema:
+      type: object
+      properties:
+        datasetArn:
+          type: string
+      required:
+      - datasetArn
+  - name: createDatasetGroup
+    description: Create a dataset group
+    inputSchema:
+      type: object
+      properties:
+        DatasetGroupName:
+          type: string
+        Domain:
+          type: string
+        DatasetArns:
+          type: array
+      required:
+      - DatasetGroupName
+      - Domain
+  - name: listDatasetGroups
+    description: List all dataset groups
+    inputSchema:
+      type: object
+      properties:
+        maxResults:
+          type: integer
+        nextToken:
+          type: string
+  - name: createPredictor
+    description: Train a Forecast predictor on a dataset group
+    inputSchema:
+      type: object
+      properties:
+        PredictorName:
+          type: string
+        ForecastHorizon:
+          type: integer
+        InputDataConfig:
+          type: object
+        FeaturizationConfig:
+          type: object
+        PerformAutoML:
+          type: boolean
+      required:
+      - PredictorName
+      - ForecastHorizon
+      - InputDataConfig
+      - FeaturizationConfig
+  - name: listPredictors
+    description: List all Forecast predictors
+    inputSchema:
+      type: object
+      properties:
+        maxResults:
+          type: integer
+        nextToken:
+          type: string
+  - name: createForecast
+    description: Generate a forecast from a trained predictor
+    inputSchema:
+      type: object
+      properties:
+        ForecastName:
+          type: string
+        PredictorArn:
+          type: string
+        ForecastTypes:
+          type: array
+      required:
+      - ForecastName
+      - PredictorArn
+  - name: listForecasts
+    description: List all Forecast forecasts
+    inputSchema:
+      type: object
+      properties:
+        maxResults:
+          type: integer
+        nextToken:
+          type: string
+  - name: createForecastExportJob
+    description: Export forecast data to S3
+    inputSchema:
+      type: object
+      properties:
+        ForecastExportJobName:
+          type: string
+        ForecastArn:
+          type: string
+        Destination:
+          type: object
+      required:
+      - ForecastExportJobName
+      - ForecastArn
+      - Destination
+  - name: listTagsForResource
+    description: List tags for a Forecast resource
+    inputSchema:
+      type: object
+      properties:
+        resourceArn:
+          type: string
+      required:
+      - resourceArn
+  - name: tagResource
+    description: Tag a Forecast resource
+    inputSchema:
+      type: object
+      properties:
+        resourceArn:
+          type: string
+        Tags:
+          type: array
+      required:
+      - resourceArn
+      - Tags

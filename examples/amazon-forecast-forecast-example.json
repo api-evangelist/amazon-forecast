@@ -1,0 +1,13 @@
+{
+  "ForecastArn": "arn:aws:forecast:us-east-1:123456789012:forecast/RetailForecastQ2",
+  "ForecastName": "RetailForecastQ2",
+  "PredictorArn": "arn:aws:forecast:us-east-1:123456789012:predictor/RetailPredictor30d",
+  "ForecastTypes": [
+    "0.1",
+    "0.5",
+    "0.9"
+  ],
+  "Status": "ACTIVE",
+  "CreationTime": "2025-04-01T08:00:00Z",
+  "LastModificationTime": "2025-04-01T10:30:00Z"
+}

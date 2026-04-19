@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-forecast/refs/heads/main/json-schema/amazon-forecast-forecast-schema.json",
+  "title": "Forecast",
+  "description": "An Amazon Forecast output generated from a trained predictor.",
+  "type": "object",
+  "properties": {
+    "ForecastArn": {
+      "type": "string",
+      "description": "ARN of the forecast."
+    },
+    "ForecastName": {
+      "type": "string",
+      "description": "Name of the forecast."
+    },
+    "PredictorArn": {
+      "type": "string",
+      "description": "ARN of the predictor used."
+    },
+    "ForecastTypes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Forecast quantiles generated."
+    },
+    "Status": {
+      "type": "string",
+      "description": "Status of the forecast."
+    },
+    "CreationTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "LastModificationTime": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "ForecastName",
+    "PredictorArn"
+  ]
+}

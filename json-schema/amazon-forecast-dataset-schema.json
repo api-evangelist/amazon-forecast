@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-forecast/refs/heads/main/json-schema/amazon-forecast-dataset-schema.json",
+  "title": "Dataset",
+  "description": "An Amazon Forecast dataset containing time-series training data.",
+  "type": "object",
+  "properties": {
+    "DatasetArn": {
+      "type": "string",
+      "description": "ARN of the dataset."
+    },
+    "DatasetName": {
+      "type": "string",
+      "description": "Name of the dataset."
+    },
+    "Domain": {
+      "type": "string",
+      "enum": [
+        "RETAIL",
+        "CUSTOM",
+        "INVENTORY_PLANNING",
+        "EC2_CAPACITY",
+        "WORK_FORCE",
+        "WEB_TRAFFIC",
+        "METRICS"
+      ],
+      "description": "Domain for the dataset."
+    },
+    "DatasetType": {
+      "type": "string",
+      "enum": [
+        "TARGET_TIME_SERIES",
+        "RELATED_TIME_SERIES",
+        "ITEM_METADATA"
+      ],
+      "description": "Type of the dataset."
+    },
+    "DataFrequency": {
+      "type": "string",
+      "description": "Frequency of data points (e.g., D for daily, H for hourly)."
+    },
+    "Status": {
+      "type": "string",
+      "description": "Status of the dataset."
+    },
+    "CreationTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time the dataset was created."
+    },
+    "LastModificationTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time the dataset was last modified."
+    }
+  },
+  "required": [
+    "DatasetName",
+    "Domain",
+    "DatasetType"
+  ]
+}

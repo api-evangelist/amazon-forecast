@@ -1,0 +1,954 @@
+openapi: 3.1.0
+info:
+  title: Amazon Forecast API
+  description: Amazon Forecast is a fully managed service that uses machine learning to deliver highly accurate time-series forecasts.
+  version: '2018-06-26'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://forecast.{region}.amazonaws.com
+  variables:
+    region:
+      default: us-east-1
+security:
+- awsSigV4: []
+tags:
+- name: Datasets
+  description: Dataset management for training data
+- name: Dataset Groups
+  description: Logical groupings of related datasets
+- name: Predictors
+  description: ML models trained on dataset groups
+- name: Forecasts
+  description: Generated forecast outputs
+- name: Export Jobs
+  description: Forecast data export to S3
+- name: Tags
+  description: Resource metadata labels
+paths:
+  /datasets:
+    post:
+      operationId: createDataset
+      summary: Create Dataset
+      description: Creates an Amazon Forecast dataset.
+      tags:
+      - Datasets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDatasetRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  DatasetArn:
+                    type: string
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    DatasetArn: arn:aws:forecast:us-east-1:123456789012:dataset/MyDataset
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      operationId: listDatasets
+      summary: List Datasets
+      description: Returns a list of datasets created using CreateDataset.
+      tags:
+      - Datasets
+      parameters:
+      - name: maxResults
+        in: query
+        schema:
+          type: integer
+        description: Maximum results to return.
+      - name: nextToken
+        in: query
+        schema:
+          type: string
+        description: Pagination token.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Datasets:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DatasetSummary'
+                  NextToken:
+                    type: string
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    Datasets:
+                    - &id001
+                      DatasetArn: arn:aws:forecast:us-east-1:123456789012:dataset/MyDataset
+                      DatasetName: MyDataset
+                      Domain: RETAIL
+                      DatasetType: TARGET_TIME_SERIES
+                      DataFrequency: D
+                      Status: ACTIVE
+                    NextToken:
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /describe/dataset/{datasetArn}:
+    get:
+      operationId: describeDataset
+      summary: Describe Dataset
+      description: Describes an Amazon Forecast dataset.
+      tags:
+      - Datasets
+      parameters:
+      - name: datasetArn
+        in: path
+        required: true
+        schema:
+          type: string
+        description: ARN of the dataset.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dataset'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value: *id001
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /dataset-groups:
+    post:
+      operationId: createDatasetGroup
+      summary: Create Dataset Group
+      description: Creates a dataset group, which holds a collection of related datasets.
+      tags:
+      - Dataset Groups
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDatasetGroupRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  DatasetGroupArn:
+                    type: string
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    DatasetGroupArn: arn:aws:forecast:us-east-1:123456789012:dataset-group/MyDSG
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      operationId: listDatasetGroups
+      summary: List Dataset Groups
+      description: Returns a list of dataset groups.
+      tags:
+      - Dataset Groups
+      parameters:
+      - name: maxResults
+        in: query
+        schema:
+          type: integer
+        description: Maximum results.
+      - name: nextToken
+        in: query
+        schema:
+          type: string
+        description: Pagination token.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  DatasetGroups:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DatasetGroupSummary'
+                  NextToken:
+                    type: string
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    DatasetGroups:
+                    - DatasetGroupArn: arn:aws:forecast:us-east-1:123456789012:dataset-group/MyDSG
+                      DatasetGroupName: MyDSG
+                      Domain: RETAIL
+                      Status: ACTIVE
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /predictors:
+    post:
+      operationId: createPredictor
+      summary: Create Predictor
+      description: Creates an Amazon Forecast predictor (ML model) trained on a dataset group.
+      tags:
+      - Predictors
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePredictorRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  PredictorArn:
+                    type: string
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    PredictorArn: arn:aws:forecast:us-east-1:123456789012:predictor/MyPredictor
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      operationId: listPredictors
+      summary: List Predictors
+      description: Returns a list of predictors.
+      tags:
+      - Predictors
+      parameters:
+      - name: maxResults
+        in: query
+        schema:
+          type: integer
+        description: Maximum results.
+      - name: nextToken
+        in: query
+        schema:
+          type: string
+        description: Pagination token.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Predictors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PredictorSummary'
+                  NextToken:
+                    type: string
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    Predictors:
+                    - PredictorArn: arn:aws:forecast:us-east-1:123456789012:predictor/MyPredictor
+                      PredictorName: MyPredictor
+                      ForecastHorizon: 30
+                      Status: ACTIVE
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /forecasts:
+    post:
+      operationId: createForecast
+      summary: Create Forecast
+      description: Creates a forecast for each item in the TARGET_TIME_SERIES dataset.
+      tags:
+      - Forecasts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateForecastRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ForecastArn:
+                    type: string
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    ForecastArn: arn:aws:forecast:us-east-1:123456789012:forecast/MyForecast
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      operationId: listForecasts
+      summary: List Forecasts
+      description: Returns a list of forecasts.
+      tags:
+      - Forecasts
+      parameters:
+      - name: maxResults
+        in: query
+        schema:
+          type: integer
+        description: Maximum results.
+      - name: nextToken
+        in: query
+        schema:
+          type: string
+        description: Pagination token.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Forecasts:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ForecastSummary'
+                  NextToken:
+                    type: string
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    Forecasts:
+                    - ForecastArn: arn:aws:forecast:us-east-1:123456789012:forecast/MyForecast
+                      ForecastName: MyForecast
+                      PredictorArn: arn:aws:forecast:us-east-1:123456789012:predictor/MyPredictor
+                      Status: ACTIVE
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /forecast-export-jobs:
+    post:
+      operationId: createForecastExportJob
+      summary: Create Forecast Export Job
+      description: Exports a forecast created by CreateForecast to your Amazon S3 bucket.
+      tags:
+      - Export Jobs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateForecastExportJobRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ForecastExportJobArn:
+                    type: string
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    ForecastExportJobArn: arn:aws:forecast:us-east-1:123456789012:forecast-export-job/MyExportJob
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /tags/{resourceArn}:
+    get:
+      operationId: listTagsForResource
+      summary: List Tags For Resource
+      description: Lists the tags for an Amazon Forecast resource.
+      tags:
+      - Tags
+      parameters:
+      - name: resourceArn
+        in: path
+        required: true
+        schema:
+          type: string
+        description: ARN of the resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Tags:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Tag'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    Tags:
+                    - Key: Environment
+                      Value: Production
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: tagResource
+      summary: Tag Resource
+      description: Associates the specified tags to a resource.
+      tags:
+      - Tags
+      parameters:
+      - name: resourceArn
+        in: path
+        required: true
+        schema:
+          type: string
+        description: ARN of the resource.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Tags:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+              required:
+              - Tags
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    awsSigV4:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: AWS Signature Version 4
+  schemas:
+    Dataset:
+      type: object
+      description: An Amazon Forecast dataset that contains training data.
+      properties:
+        DatasetArn:
+          type: string
+        DatasetName:
+          type: string
+        Domain:
+          type: string
+          enum:
+          - RETAIL
+          - CUSTOM
+          - INVENTORY_PLANNING
+          - EC2_CAPACITY
+          - WORK_FORCE
+          - WEB_TRAFFIC
+          - METRICS
+        DatasetType:
+          type: string
+          enum:
+          - TARGET_TIME_SERIES
+          - RELATED_TIME_SERIES
+          - ITEM_METADATA
+        DataFrequency:
+          type: string
+        Schema:
+          type: object
+        EncryptionConfig:
+          type: object
+        Status:
+          type: string
+        DatasetArn_:
+          type: string
+        CreationTime:
+          type: string
+          format: date-time
+        LastModificationTime:
+          type: string
+          format: date-time
+      required:
+      - DatasetName
+      - Domain
+      - DatasetType
+      - Schema
+    DatasetSummary:
+      type: object
+      description: Summary of an Amazon Forecast dataset.
+      properties:
+        DatasetArn:
+          type: string
+        DatasetName:
+          type: string
+        DatasetType:
+          type: string
+        Domain:
+          type: string
+        Status:
+          type: string
+        CreationTime:
+          type: string
+          format: date-time
+        LastModificationTime:
+          type: string
+          format: date-time
+    DatasetGroupSummary:
+      type: object
+      description: Summary of an Amazon Forecast dataset group.
+      properties:
+        DatasetGroupArn:
+          type: string
+        DatasetGroupName:
+          type: string
+        Domain:
+          type: string
+        Status:
+          type: string
+        CreationTime:
+          type: string
+          format: date-time
+        LastModificationTime:
+          type: string
+          format: date-time
+    Predictor:
+      type: object
+      description: An Amazon Forecast predictor (ML model) trained on a dataset group.
+      properties:
+        PredictorArn:
+          type: string
+        PredictorName:
+          type: string
+        AlgorithmArn:
+          type: string
+        AutoMLAlgorithmArns:
+          type: array
+          items:
+            type: string
+        ForecastHorizon:
+          type: integer
+        ForecastTypes:
+          type: array
+          items:
+            type: string
+        PerformAutoML:
+          type: boolean
+        PerformHPO:
+          type: boolean
+        TrainingParameters:
+          type: object
+          additionalProperties:
+            type: string
+        EvaluationParameters:
+          type: object
+        HPOConfig:
+          type: object
+        InputDataConfig:
+          type: object
+        FeaturizationConfig:
+          type: object
+        EncryptionConfig:
+          type: object
+        PredictorExecutionDetails:
+          type: object
+        DatasetImportJobArns:
+          type: array
+          items:
+            type: string
+        AutoMLAlgorithmArns_:
+          type: array
+          items:
+            type: string
+        Status:
+          type: string
+        CreationTime:
+          type: string
+          format: date-time
+        LastModificationTime:
+          type: string
+          format: date-time
+      required:
+      - PredictorName
+      - ForecastHorizon
+      - InputDataConfig
+      - FeaturizationConfig
+    PredictorSummary:
+      type: object
+      description: Summary of an Amazon Forecast predictor.
+      properties:
+        PredictorArn:
+          type: string
+        PredictorName:
+          type: string
+        Status:
+          type: string
+        CreationTime:
+          type: string
+          format: date-time
+        LastModificationTime:
+          type: string
+          format: date-time
+    Forecast:
+      type: object
+      description: An Amazon Forecast forecast generated from a trained predictor.
+      properties:
+        ForecastArn:
+          type: string
+        ForecastName:
+          type: string
+        ForecastTypes:
+          type: array
+          items:
+            type: string
+        PredictorArn:
+          type: string
+        DatasetGroupArn:
+          type: string
+        Status:
+          type: string
+        Message:
+          type: string
+        CreationTime:
+          type: string
+          format: date-time
+        LastModificationTime:
+          type: string
+          format: date-time
+        Tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+      required:
+      - ForecastName
+      - PredictorArn
+    ForecastSummary:
+      type: object
+      description: Summary of an Amazon Forecast forecast.
+      properties:
+        ForecastArn:
+          type: string
+        ForecastName:
+          type: string
+        PredictorArn:
+          type: string
+        DatasetGroupArn:
+          type: string
+        Status:
+          type: string
+        CreationTime:
+          type: string
+          format: date-time
+        LastModificationTime:
+          type: string
+          format: date-time
+    Tag:
+      type: object
+      description: A metadata label applied to a Forecast resource.
+      properties:
+        Key:
+          type: string
+        Value:
+          type: string
+      required:
+      - Key
+      - Value
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Forecast API.
+      properties:
+        Message:
+          type: string
+        Code:
+          type: string
+    CreateDatasetRequest:
+      type: object
+      required:
+      - DatasetName
+      - Domain
+      - DatasetType
+      - Schema
+      properties:
+        DatasetName:
+          type: string
+        Domain:
+          type: string
+        DatasetType:
+          type: string
+        DataFrequency:
+          type: string
+        Schema:
+          type: object
+        Tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+    CreateDatasetGroupRequest:
+      type: object
+      required:
+      - DatasetGroupName
+      - Domain
+      properties:
+        DatasetGroupName:
+          type: string
+        Domain:
+          type: string
+        DatasetArns:
+          type: array
+          items:
+            type: string
+        Tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+    CreatePredictorRequest:
+      type: object
+      required:
+      - PredictorName
+      - ForecastHorizon
+      - InputDataConfig
+      - FeaturizationConfig
+      properties:
+        PredictorName:
+          type: string
+        AlgorithmArn:
+          type: string
+        ForecastHorizon:
+          type: integer
+        ForecastTypes:
+          type: array
+          items:
+            type: string
+        PerformAutoML:
+          type: boolean
+        PerformHPO:
+          type: boolean
+        InputDataConfig:
+          type: object
+        FeaturizationConfig:
+          type: object
+        Tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+    CreateForecastRequest:
+      type: object
+      required:
+      - ForecastName
+      - PredictorArn
+      properties:
+        ForecastName:
+          type: string
+        PredictorArn:
+          type: string
+        ForecastTypes:
+          type: array
+          items:
+            type: string
+        Tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+    CreateForecastExportJobRequest:
+      type: object
+      required:
+      - ForecastExportJobName
+      - ForecastArn
+      - Destination
+      properties:
+        ForecastExportJobName:
+          type: string
+        ForecastArn:
+          type: string
+        Destination:
+          type: object
+        Tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'

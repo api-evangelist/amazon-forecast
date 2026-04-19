@@ -1,0 +1,10 @@
+{
+  "DatasetArn": "arn:aws:forecast:us-east-1:123456789012:dataset/RetailSalesData",
+  "DatasetName": "RetailSalesData",
+  "Domain": "RETAIL",
+  "DatasetType": "TARGET_TIME_SERIES",
+  "DataFrequency": "D",
+  "Status": "ACTIVE",
+  "CreationTime": "2025-01-10T09:00:00Z",
+  "LastModificationTime": "2025-06-01T12:00:00Z"
+}

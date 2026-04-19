@@ -1,0 +1,85 @@
+vocabulary:
+  id: amazon-forecast-vocabulary
+  name: Amazon Forecast Vocabulary
+  description: Controlled vocabulary for Amazon Forecast time-series ML forecasting.
+  version: 1.0.0
+  provider: Amazon Web Services
+  resources:
+  - name: Dataset
+    description: Time-series data (target, related, or metadata) used to train predictors.
+    operations:
+    - createDataset
+    - describeDataset
+    - listDatasets
+    - deleteDataset
+  - name: DatasetGroup
+    description: Logical collection of datasets for training a predictor.
+    operations:
+    - createDatasetGroup
+    - describeDatasetGroup
+    - listDatasetGroups
+    - deleteDatasetGroup
+  - name: Predictor
+    description: A trained ML model that generates forecasts from a dataset group.
+    operations:
+    - createPredictor
+    - describePredictor
+    - listPredictors
+    - deletePredictor
+  - name: Forecast
+    description: The output of running predictions against a trained predictor.
+    operations:
+    - createForecast
+    - describeForecast
+    - listForecasts
+    - deleteForecast
+  - name: ForecastExportJob
+    description: A job that exports forecast data to Amazon S3.
+    operations:
+    - createForecastExportJob
+    - describeForecastExportJob
+    - listForecastExportJobs
+    - deleteForecastExportJob
+  - name: Tag
+    description: Key-value metadata label applied to Forecast resources.
+    operations:
+    - listTagsForResource
+    - tagResource
+    - untagResource
+  actions:
+  - name: create
+    description: Provision a new resource.
+  - name: describe
+    description: Retrieve full details of a resource.
+  - name: list
+    description: Enumerate resources of a given type.
+  - name: delete
+    description: Remove a resource and free its storage.
+  - name: tag
+    description: Add metadata tags to a resource.
+  - name: untag
+    description: Remove metadata tags from a resource.
+  concepts:
+  - term: ForecastHorizon
+    definition: Number of future time steps to predict. Measured in units of DataFrequency.
+  - term: Domain
+    definition: Business domain context for a dataset or predictor (e.g., RETAIL, WORK_FORCE, EC2_CAPACITY).
+  - term: DatasetType
+    definition: One of TARGET_TIME_SERIES, RELATED_TIME_SERIES, or ITEM_METADATA — determines the role of data in training.
+  - term: PerformAutoML
+    definition: When True, Forecast automatically selects the best algorithm for the data.
+  - term: PerformHPO
+    definition: When True, Forecast tunes hyperparameters automatically for improved accuracy.
+  - term: ForecastTypes
+    definition: Probability quantiles produced by the predictor (e.g., p10, p50, p90 for uncertainty estimation).
+  - term: DeepAR+
+    definition: Amazon's proprietary recurrent neural network algorithm optimized for time-series forecasting.
+  - term: DataFrequency
+    definition: 'The granularity of time-series data: Y (yearly), M (monthly), W (weekly), D (daily), H (hourly), 30min, 15min, 10min, 5min, 1min.'
+  tags:
+  - Forecasting
+  - Machine Learning
+  - Time Series
+  - Demand Planning
+  - AWS
+  - Predictive Analytics

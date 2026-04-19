@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-forecast/refs/heads/main/json-structure/amazon-forecast-dataset-group-structure.json",
+  "name": "DatasetGroup",
+  "description": "A logical grouping of Amazon Forecast datasets for training a predictor.",
+  "type": "object",
+  "fields": [
+    {
+      "name": "DatasetGroupArn",
+      "type": "string",
+      "description": "ARN of the dataset group."
+    },
+    {
+      "name": "DatasetGroupName",
+      "type": "string",
+      "description": "Name of the dataset group.",
+      "required": true
+    },
+    {
+      "name": "Domain",
+      "type": "string",
+      "description": "Domain of the dataset group.",
+      "required": true,
+      "enum": [
+        "RETAIL",
+        "CUSTOM",
+        "INVENTORY_PLANNING",
+        "EC2_CAPACITY",
+        "WORK_FORCE",
+        "WEB_TRAFFIC",
+        "METRICS"
+      ]
+    },
+    {
+      "name": "DatasetArns",
+      "type": "array",
+      "description": "ARNs of datasets in this group."
+    },
+    {
+      "name": "Status",
+      "type": "string",
+      "description": ""
+    },
+    {
+      "name": "CreationTime",
+      "type": "datetime",
+      "description": ""
+    },
+    {
+      "name": "LastModificationTime",
+      "type": "datetime",
+      "description": ""
+    }
+  ]
+}

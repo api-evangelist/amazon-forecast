@@ -1,0 +1,11 @@
+{
+  "DatasetGroupArn": "arn:aws:forecast:us-east-1:123456789012:dataset-group/RetailForecastGroup",
+  "DatasetGroupName": "RetailForecastGroup",
+  "Domain": "RETAIL",
+  "DatasetArns": [
+    "arn:aws:forecast:us-east-1:123456789012:dataset/RetailSalesData"
+  ],
+  "Status": "ACTIVE",
+  "CreationTime": "2025-01-10T09:00:00Z",
+  "LastModificationTime": "2025-06-01T12:00:00Z"
+}

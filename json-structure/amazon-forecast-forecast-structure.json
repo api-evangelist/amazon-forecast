@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-forecast/refs/heads/main/json-structure/amazon-forecast-forecast-structure.json",
+  "name": "Forecast",
+  "description": "An Amazon Forecast output generated from a trained predictor.",
+  "type": "object",
+  "fields": [
+    {
+      "name": "ForecastArn",
+      "type": "string",
+      "description": "ARN of the forecast."
+    },
+    {
+      "name": "ForecastName",
+      "type": "string",
+      "description": "Name of the forecast.",
+      "required": true
+    },
+    {
+      "name": "PredictorArn",
+      "type": "string",
+      "description": "ARN of the predictor used.",
+      "required": true
+    },
+    {
+      "name": "ForecastTypes",
+      "type": "array",
+      "description": "Forecast quantiles generated."
+    },
+    {
+      "name": "Status",
+      "type": "string",
+      "description": "Status of the forecast."
+    },
+    {
+      "name": "CreationTime",
+      "type": "datetime",
+      "description": ""
+    },
+    {
+      "name": "LastModificationTime",
+      "type": "datetime",
+      "description": ""
+    }
+  ]
+}

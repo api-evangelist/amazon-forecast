@@ -1,0 +1,27 @@
+naftiko: 1.0.0-alpha1
+info:
+  label: Amazon Forecast
+  tags:
+  - Forecasting
+  - Machine Learning
+  - Time Series
+  - AWS
+binds:
+- namespace: env
+  keys:
+    AWS_ACCESS_KEY_ID: AWS_ACCESS_KEY_ID
+    AWS_SECRET_ACCESS_KEY: AWS_SECRET_ACCESS_KEY
+    AWS_REGION: AWS_REGION
+capability:
+  consumes:
+  - type: http
+    namespace: forecast
+    baseUri: https://forecast.{AWS_REGION}.amazonaws.com
+    authentication:
+      type: apikey
+      key: Authorization
+  exposes:
+  - type: rest
+    port: 8100
+  - type: mcp
+    port: 9100

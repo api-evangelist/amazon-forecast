@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-forecast/refs/heads/main/json-structure/amazon-forecast-tag-structure.json",
+  "name": "Tag",
+  "description": "A metadata label applied to an Amazon Forecast resource.",
+  "type": "object",
+  "fields": [
+    {
+      "name": "Key",
+      "type": "string",
+      "description": "Tag key.",
+      "required": true
+    },
+    {
+      "name": "Value",
+      "type": "string",
+      "description": "Tag value.",
+      "required": true
+    }
+  ]
+}

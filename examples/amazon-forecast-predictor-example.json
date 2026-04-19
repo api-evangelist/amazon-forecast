@@ -1,0 +1,16 @@
+{
+  "PredictorArn": "arn:aws:forecast:us-east-1:123456789012:predictor/RetailPredictor30d",
+  "PredictorName": "RetailPredictor30d",
+  "AlgorithmArn": "arn:aws:forecast:::algorithm/Deep_AR_Plus",
+  "ForecastHorizon": 30,
+  "ForecastTypes": [
+    "0.1",
+    "0.5",
+    "0.9"
+  ],
+  "PerformAutoML": false,
+  "PerformHPO": true,
+  "Status": "ACTIVE",
+  "CreationTime": "2025-02-01T10:00:00Z",
+  "LastModificationTime": "2025-02-15T16:00:00Z"
+}

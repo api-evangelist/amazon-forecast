@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-forecast/refs/heads/main/json-schema/amazon-forecast-dataset-group-schema.json",
+  "title": "DatasetGroup",
+  "description": "A logical grouping of Amazon Forecast datasets for training a predictor.",
+  "type": "object",
+  "properties": {
+    "DatasetGroupArn": {
+      "type": "string",
+      "description": "ARN of the dataset group."
+    },
+    "DatasetGroupName": {
+      "type": "string",
+      "description": "Name of the dataset group."
+    },
+    "Domain": {
+      "type": "string",
+      "enum": [
+        "RETAIL",
+        "CUSTOM",
+        "INVENTORY_PLANNING",
+        "EC2_CAPACITY",
+        "WORK_FORCE",
+        "WEB_TRAFFIC",
+        "METRICS"
+      ],
+      "description": "Domain of the dataset group."
+    },
+    "DatasetArns": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "ARNs of datasets in this group."
+    },
+    "Status": {
+      "type": "string"
+    },
+    "CreationTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "LastModificationTime": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "DatasetGroupName",
+    "Domain"
+  ]
+}
