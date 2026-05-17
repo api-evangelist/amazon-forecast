@@ -109,7 +109,7 @@ common:
   url: capabilities/amazon-forecast-time-series-prediction.yaml
 - type: Vocabulary
   url: vocabulary/amazon-forecast-vocabulary.yaml
-- type: JSON-LD
+- type: JSONLD
   url: json-ld/amazon-forecast-context.jsonld
 - type: Features
   data:
