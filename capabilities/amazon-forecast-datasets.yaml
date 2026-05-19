@@ -1,0 +1,164 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amazon Forecast API — Datasets
+  description: 'Amazon Forecast API — Datasets. 3 operations. Lead operation: Create Dataset. Self-contained Naftiko capability
+    covering one Amazon Forecast business surface.'
+  tags:
+  - Amazon Forecast
+  - Datasets
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMAZON_FORECAST_API_KEY: AMAZON_FORECAST_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: amazon-forecast-datasets
+    baseUri: https://forecast.{region}.amazonaws.com
+    description: Amazon Forecast API — Datasets business capability. Self-contained, no shared references.
+    resources:
+    - name: datasets
+      path: /datasets
+      operations:
+      - name: createdataset
+        method: POST
+        description: Create Dataset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: listdatasets
+        method: GET
+        description: List Datasets
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: maxResults
+          in: query
+          type: integer
+          description: Maximum results to return.
+        - name: nextToken
+          in: query
+          type: string
+          description: Pagination token.
+    - name: describe-dataset-datasetArn
+      path: /describe/dataset/{datasetArn}
+      operations:
+      - name: describedataset
+        method: GET
+        description: Describe Dataset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: datasetArn
+          in: path
+          type: string
+          description: ARN of the dataset.
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.AMAZON_FORECAST_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: amazon-forecast-datasets-rest
+    port: 8080
+    description: REST adapter for Amazon Forecast API — Datasets. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/datasets
+      name: datasets
+      description: REST surface for datasets.
+      operations:
+      - method: POST
+        name: createdataset
+        description: Create Dataset
+        call: amazon-forecast-datasets.createdataset
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: listdatasets
+        description: List Datasets
+        call: amazon-forecast-datasets.listdatasets
+        with:
+          maxResults: rest.maxResults
+          nextToken: rest.nextToken
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/describe/dataset/{datasetarn}
+      name: describe-dataset-datasetarn
+      description: REST surface for describe-dataset-datasetArn.
+      operations:
+      - method: GET
+        name: describedataset
+        description: Describe Dataset
+        call: amazon-forecast-datasets.describedataset
+        with:
+          datasetArn: rest.datasetArn
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: amazon-forecast-datasets-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amazon Forecast API — Datasets. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: create-dataset
+      description: Create Dataset
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-forecast-datasets.createdataset
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-datasets
+      description: List Datasets
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-forecast-datasets.listdatasets
+      with:
+        maxResults: tools.maxResults
+        nextToken: tools.nextToken
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: describe-dataset
+      description: Describe Dataset
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-forecast-datasets.describedataset
+      with:
+        datasetArn: tools.datasetArn
+      outputParameters:
+      - type: object
+        mapping: $.

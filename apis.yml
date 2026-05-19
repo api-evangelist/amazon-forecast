@@ -1,10 +1,8 @@
 aid: amazon-forecast
 name: Amazon Forecast
-description: >-
-  Amazon Forecast is a fully managed service that uses machine learning to
-  deliver highly accurate forecasts. It analyzes your historical time-series
-  data and automatically selects the right machine learning algorithms to
-  generate accurate forecasts with no machine learning expertise required.
+description: Amazon Forecast is a fully managed service that uses machine learning to deliver highly accurate forecasts. It
+  analyzes your historical time-series data and automatically selects the right machine learning algorithms to generate accurate
+  forecasts with no machine learning expertise required.
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
@@ -13,18 +11,15 @@ tags:
 - Machine Learning
 - Predictive Analytics
 - Time Series
-url: >-
-  https://raw.githubusercontent.com/api-evangelist/amazon-forecast/refs/heads/main/apis.yml
+url: https://raw.githubusercontent.com/api-evangelist/amazon-forecast/refs/heads/main/apis.yml
 created: '2026-03-16'
-modified: '2026-04-19'
+modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
 - aid: amazon-forecast:amazon-forecast-api
   name: Amazon Forecast API
-  description: >-
-    The Amazon Forecast API provides programmatic access to create and manage
-    datasets, predictors, forecasts, and export jobs for time-series
-    forecasting using machine learning models.
+  description: The Amazon Forecast API provides programmatic access to create and manage datasets, predictors, forecasts,
+    and export jobs for time-series forecasting using machine learning models.
   humanURL: https://aws.amazon.com/forecast/
   baseURL: https://forecast.amazonaws.com
   tags:
@@ -74,6 +69,18 @@ apis:
     url: https://aws.amazon.com/forecast/faqs/
   - type: APIReference
     url: https://docs.aws.amazon.com/forecast/latest/dg/API_Operations.html
+  - type: NaftikoCapability
+    url: capabilities/amazon-forecast-dataset-groups.yaml
+  - type: NaftikoCapability
+    url: capabilities/amazon-forecast-datasets.yaml
+  - type: NaftikoCapability
+    url: capabilities/amazon-forecast-export-jobs.yaml
+  - type: NaftikoCapability
+    url: capabilities/amazon-forecast-forecasts.yaml
+  - type: NaftikoCapability
+    url: capabilities/amazon-forecast-predictors.yaml
+  - type: NaftikoCapability
+    url: capabilities/amazon-forecast-tags.yaml
 common:
 - type: Portal
   url: https://aws.amazon.com/forecast/
@@ -103,10 +110,6 @@ common:
   url: https://stackoverflow.com/questions/tagged/amazon-forecast
 - type: SpectralRules
   url: rules/amazon-forecast-spectral-rules.yml
-- type: NaftikoCapability
-  url: capabilities/shared/forecast.yaml
-- type: NaftikoCapability
-  url: capabilities/amazon-forecast-time-series-prediction.yaml
 - type: Vocabulary
   url: vocabulary/amazon-forecast-vocabulary.yaml
 - type: JSONLD
@@ -114,7 +117,8 @@ common:
 - type: Features
   data:
   - name: AutoML
-    description: Automatically evaluates and selects from over 60 ML algorithms to find the best fit for your time-series data.
+    description: Automatically evaluates and selects from over 60 ML algorithms to find the best fit for your time-series
+      data.
   - name: Probabilistic Forecasts
     description: Generates quantile forecasts (p10, p50, p90) to estimate demand uncertainty and plan inventory buffers.
   - name: Domain-Specific Models
@@ -160,15 +164,15 @@ common:
 - type: Integrations
   url: https://aws.amazon.com/marketplace
 integrations:
-  - name: Sign in
-  - name: Agent Mode
-  - name: 'Why AWS Marketplace?'
-  - name: Get started in AWS Marketplace
-  - name: Industry
-  - name: Resources
-  - name: Become a Channel Partner
-  - name: Sell in AWS Marketplace
-  - name: Manage Your Account
+- name: Sign in
+- name: Agent Mode
+- name: Why AWS Marketplace?
+- name: Get started in AWS Marketplace
+- name: Industry
+- name: Resources
+- name: Become a Channel Partner
+- name: Sell in AWS Marketplace
+- name: Manage Your Account
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

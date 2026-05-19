@@ -1,0 +1,122 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amazon Forecast API — Forecasts
+  description: 'Amazon Forecast API — Forecasts. 2 operations. Lead operation: Create Forecast. Self-contained Naftiko capability
+    covering one Amazon Forecast business surface.'
+  tags:
+  - Amazon Forecast
+  - Forecasts
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMAZON_FORECAST_API_KEY: AMAZON_FORECAST_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: amazon-forecast-forecasts
+    baseUri: https://forecast.{region}.amazonaws.com
+    description: Amazon Forecast API — Forecasts business capability. Self-contained, no shared references.
+    resources:
+    - name: forecasts
+      path: /forecasts
+      operations:
+      - name: createforecast
+        method: POST
+        description: Create Forecast
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: listforecasts
+        method: GET
+        description: List Forecasts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: maxResults
+          in: query
+          type: integer
+          description: Maximum results.
+        - name: nextToken
+          in: query
+          type: string
+          description: Pagination token.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.AMAZON_FORECAST_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: amazon-forecast-forecasts-rest
+    port: 8080
+    description: REST adapter for Amazon Forecast API — Forecasts. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/forecasts
+      name: forecasts
+      description: REST surface for forecasts.
+      operations:
+      - method: POST
+        name: createforecast
+        description: Create Forecast
+        call: amazon-forecast-forecasts.createforecast
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: listforecasts
+        description: List Forecasts
+        call: amazon-forecast-forecasts.listforecasts
+        with:
+          maxResults: rest.maxResults
+          nextToken: rest.nextToken
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: amazon-forecast-forecasts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amazon Forecast API — Forecasts. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: create-forecast
+      description: Create Forecast
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-forecast-forecasts.createforecast
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-forecasts
+      description: List Forecasts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-forecast-forecasts.listforecasts
+      with:
+        maxResults: tools.maxResults
+        nextToken: tools.nextToken
+      outputParameters:
+      - type: object
+        mapping: $.

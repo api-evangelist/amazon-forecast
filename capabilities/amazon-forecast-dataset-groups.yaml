@@ -1,0 +1,122 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amazon Forecast API — Dataset Groups
+  description: 'Amazon Forecast API — Dataset Groups. 2 operations. Lead operation: Create Dataset Group. Self-contained Naftiko
+    capability covering one Amazon Forecast business surface.'
+  tags:
+  - Amazon Forecast
+  - Dataset Groups
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMAZON_FORECAST_API_KEY: AMAZON_FORECAST_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: amazon-forecast-dataset-groups
+    baseUri: https://forecast.{region}.amazonaws.com
+    description: Amazon Forecast API — Dataset Groups business capability. Self-contained, no shared references.
+    resources:
+    - name: dataset-groups
+      path: /dataset-groups
+      operations:
+      - name: createdatasetgroup
+        method: POST
+        description: Create Dataset Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: listdatasetgroups
+        method: GET
+        description: List Dataset Groups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: maxResults
+          in: query
+          type: integer
+          description: Maximum results.
+        - name: nextToken
+          in: query
+          type: string
+          description: Pagination token.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.AMAZON_FORECAST_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: amazon-forecast-dataset-groups-rest
+    port: 8080
+    description: REST adapter for Amazon Forecast API — Dataset Groups. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/dataset-groups
+      name: dataset-groups
+      description: REST surface for dataset-groups.
+      operations:
+      - method: POST
+        name: createdatasetgroup
+        description: Create Dataset Group
+        call: amazon-forecast-dataset-groups.createdatasetgroup
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: listdatasetgroups
+        description: List Dataset Groups
+        call: amazon-forecast-dataset-groups.listdatasetgroups
+        with:
+          maxResults: rest.maxResults
+          nextToken: rest.nextToken
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: amazon-forecast-dataset-groups-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amazon Forecast API — Dataset Groups. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: create-dataset-group
+      description: Create Dataset Group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-forecast-dataset-groups.createdatasetgroup
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-dataset-groups
+      description: List Dataset Groups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-forecast-dataset-groups.listdatasetgroups
+      with:
+        maxResults: tools.maxResults
+        nextToken: tools.nextToken
+      outputParameters:
+      - type: object
+        mapping: $.

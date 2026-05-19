@@ -1,0 +1,122 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amazon Forecast API — Predictors
+  description: 'Amazon Forecast API — Predictors. 2 operations. Lead operation: Create Predictor. Self-contained Naftiko capability
+    covering one Amazon Forecast business surface.'
+  tags:
+  - Amazon Forecast
+  - Predictors
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMAZON_FORECAST_API_KEY: AMAZON_FORECAST_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: amazon-forecast-predictors
+    baseUri: https://forecast.{region}.amazonaws.com
+    description: Amazon Forecast API — Predictors business capability. Self-contained, no shared references.
+    resources:
+    - name: predictors
+      path: /predictors
+      operations:
+      - name: createpredictor
+        method: POST
+        description: Create Predictor
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: listpredictors
+        method: GET
+        description: List Predictors
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: maxResults
+          in: query
+          type: integer
+          description: Maximum results.
+        - name: nextToken
+          in: query
+          type: string
+          description: Pagination token.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.AMAZON_FORECAST_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: amazon-forecast-predictors-rest
+    port: 8080
+    description: REST adapter for Amazon Forecast API — Predictors. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/predictors
+      name: predictors
+      description: REST surface for predictors.
+      operations:
+      - method: POST
+        name: createpredictor
+        description: Create Predictor
+        call: amazon-forecast-predictors.createpredictor
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: listpredictors
+        description: List Predictors
+        call: amazon-forecast-predictors.listpredictors
+        with:
+          maxResults: rest.maxResults
+          nextToken: rest.nextToken
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: amazon-forecast-predictors-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amazon Forecast API — Predictors. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: create-predictor
+      description: Create Predictor
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-forecast-predictors.createpredictor
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-predictors
+      description: List Predictors
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-forecast-predictors.listpredictors
+      with:
+        maxResults: tools.maxResults
+        nextToken: tools.nextToken
+      outputParameters:
+      - type: object
+        mapping: $.
