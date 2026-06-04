@@ -1,0 +1,121 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Forecast Export Forecast
+  summary: Create a forecast, wait until ACTIVE, export it to S3, and read its tags.
+  description: >-
+    Produces a forecast and ships its results to Amazon S3. The workflow creates
+    a forecast from a trained predictor, polls the forecast listing until the
+    matching forecast reaches the ACTIVE status, creates a forecast export job
+    that writes the forecast to the supplied S3 destination, and then reads the
+    tags on the new export job. Every step spells out its request inline so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: amazonForecastApi
+  url: ../openapi/amazon-forecast-openapi.yml
+  type: openapi
+workflows:
+- workflowId: export-forecast
+  summary: Generate a forecast and export it to Amazon S3 once it is ACTIVE.
+  description: >-
+    Creates a forecast, polls listForecasts until the matching forecast is
+    ACTIVE, creates a forecast export job to S3, and reads the export job tags.
+  inputs:
+    type: object
+    required:
+    - forecastName
+    - predictorArn
+    - exportJobName
+    - destination
+    properties:
+      forecastName:
+        type: string
+        description: A name for the forecast.
+      predictorArn:
+        type: string
+        description: The ARN of the trained predictor.
+      forecastTypes:
+        type: array
+        description: The quantiles at which probabilistic forecasts are generated.
+        items:
+          type: string
+      exportJobName:
+        type: string
+        description: A name for the forecast export job.
+      destination:
+        type: object
+        description: The S3 destination configuration for the exported forecast.
+  steps:
+  - stepId: createForecast
+    description: >-
+      Create the forecast from the trained predictor.
+    operationId: createForecast
+    requestBody:
+      contentType: application/json
+      payload:
+        ForecastName: $inputs.forecastName
+        PredictorArn: $inputs.predictorArn
+        ForecastTypes: $inputs.forecastTypes
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      forecastArn: $response.body#/ForecastArn
+  - stepId: waitForActive
+    description: >-
+      List forecasts and confirm the newly created forecast has reached the
+      ACTIVE status before exporting it. Repeat while the forecast generates.
+    operationId: listForecasts
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.Forecasts[?(@.ForecastArn == "$steps.createForecast.outputs.forecastArn")].Status contains "ACTIVE"
+      type: jsonpath
+    onSuccess:
+    - name: forecastActive
+      type: goto
+      stepId: createExportJob
+      criteria:
+      - context: $response.body
+        condition: $.Forecasts[?(@.ForecastArn == "$steps.createForecast.outputs.forecastArn")].Status contains "ACTIVE"
+        type: jsonpath
+    onFailure:
+    - name: stillGenerating
+      type: retry
+      retryAfter: 60
+      retryLimit: 30
+      criteria:
+      - condition: $statusCode == 200
+    outputs:
+      forecasts: $response.body#/Forecasts
+  - stepId: createExportJob
+    description: >-
+      Create a forecast export job that writes the ACTIVE forecast to the
+      supplied S3 destination.
+    operationId: createForecastExportJob
+    requestBody:
+      contentType: application/json
+      payload:
+        ForecastExportJobName: $inputs.exportJobName
+        ForecastArn: $steps.createForecast.outputs.forecastArn
+        Destination: $inputs.destination
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      forecastExportJobArn: $response.body#/ForecastExportJobArn
+  - stepId: readExportJobTags
+    description: >-
+      Read the tags associated with the new forecast export job.
+    operationId: listTagsForResource
+    parameters:
+    - name: resourceArn
+      in: path
+      value: $steps.createExportJob.outputs.forecastExportJobArn
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      tags: $response.body#/Tags
+  outputs:
+    forecastArn: $steps.createForecast.outputs.forecastArn
+    forecastExportJobArn: $steps.createExportJob.outputs.forecastExportJobArn
+    tags: $steps.readExportJobTags.outputs.tags

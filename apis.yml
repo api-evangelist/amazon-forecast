@@ -82,6 +82,36 @@ apis:
   - type: NaftikoCapability
     url: capabilities/amazon-forecast-tags.yaml
 common:
+- type: ArazzoWorkflows
+  url: arazzo/
+  workflows:
+  - url: arazzo/amazon-forecast-end-to-end-pipeline-workflow.yml
+    name: Amazon Forecast End to End Pipeline
+    summary: Create a dataset, dataset group, predictor, and forecast in a single chained pass.
+  - url: arazzo/amazon-forecast-export-forecast-workflow.yml
+    name: Amazon Forecast Export Forecast
+    summary: Create a forecast, wait until ACTIVE, export it to S3, and read its tags.
+  - url: arazzo/amazon-forecast-generate-forecast-workflow.yml
+    name: Amazon Forecast Generate Forecast
+    summary: Create a forecast from a predictor, poll until ACTIVE, and tag it.
+  - url: arazzo/amazon-forecast-group-then-train-workflow.yml
+    name: Amazon Forecast Group Then Train
+    summary: Create a dataset group, wait until ACTIVE, then train a predictor on it.
+  - url: arazzo/amazon-forecast-predict-and-forecast-workflow.yml
+    name: Amazon Forecast Predict and Forecast
+    summary: Train a predictor, wait until ACTIVE, then create a forecast and wait until ACTIVE.
+  - url: arazzo/amazon-forecast-provision-dataset-group-workflow.yml
+    name: Amazon Forecast Provision Dataset Group
+    summary: Create a dataset group, poll the listing until it is ACTIVE, and tag it.
+  - url: arazzo/amazon-forecast-provision-dataset-workflow.yml
+    name: Amazon Forecast Provision Dataset
+    summary: Create a dataset, poll until it becomes ACTIVE, and tag it.
+  - url: arazzo/amazon-forecast-register-dataset-to-group-workflow.yml
+    name: Amazon Forecast Register Dataset to Group
+    summary: Create a dataset, wait until ACTIVE, then create a dataset group containing it.
+  - url: arazzo/amazon-forecast-train-predictor-workflow.yml
+    name: Amazon Forecast Train Predictor
+    summary: Create a predictor, poll the listing until it is ACTIVE, and tag it.
 - type: Portal
   url: https://aws.amazon.com/forecast/
 - type: Website

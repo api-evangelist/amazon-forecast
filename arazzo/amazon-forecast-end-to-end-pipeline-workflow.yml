@@ -1,0 +1,137 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Forecast End to End Pipeline
+  summary: Create a dataset, dataset group, predictor, and forecast in a single chained pass.
+  description: >-
+    Walks the full Amazon Forecast modeling pipeline end to end. The workflow
+    creates a dataset, creates a dataset group that references that dataset,
+    trains a predictor against the group, and finally generates a forecast from
+    the trained predictor — passing each created ARN forward to the next stage.
+    The long-running ACTIVE polling for individual resources is handled by the
+    dedicated provisioning workflows; this flow focuses on the create-and-chain
+    backbone. Every step spells out its request inline so the flow can be read
+    and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: amazonForecastApi
+  url: ../openapi/amazon-forecast-openapi.yml
+  type: openapi
+workflows:
+- workflowId: end-to-end-pipeline
+  summary: Chain dataset, dataset group, predictor, and forecast creation.
+  description: >-
+    Creates a dataset, a dataset group referencing it, a predictor, and a
+    forecast, threading each resulting ARN into the next create call.
+  inputs:
+    type: object
+    required:
+    - datasetName
+    - domain
+    - datasetType
+    - schema
+    - datasetGroupName
+    - predictorName
+    - forecastHorizon
+    - inputDataConfig
+    - featurizationConfig
+    - forecastName
+    properties:
+      datasetName:
+        type: string
+        description: A name for the dataset.
+      domain:
+        type: string
+        description: The domain shared across the pipeline resources.
+      datasetType:
+        type: string
+        description: The dataset type (e.g. TARGET_TIME_SERIES).
+      dataFrequency:
+        type: string
+        description: The frequency of data collection.
+      schema:
+        type: object
+        description: The schema for the dataset.
+      datasetGroupName:
+        type: string
+        description: A name for the dataset group.
+      predictorName:
+        type: string
+        description: A name for the predictor.
+      forecastHorizon:
+        type: integer
+        description: The number of time-steps to predict.
+      inputDataConfig:
+        type: object
+        description: The training input configuration for the predictor.
+      featurizationConfig:
+        type: object
+        description: The featurization configuration for the predictor.
+      forecastName:
+        type: string
+        description: A name for the generated forecast.
+  steps:
+  - stepId: createDataset
+    description: >-
+      Create the dataset that seeds the pipeline.
+    operationId: createDataset
+    requestBody:
+      contentType: application/json
+      payload:
+        DatasetName: $inputs.datasetName
+        Domain: $inputs.domain
+        DatasetType: $inputs.datasetType
+        DataFrequency: $inputs.dataFrequency
+        Schema: $inputs.schema
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      datasetArn: $response.body#/DatasetArn
+  - stepId: createDatasetGroup
+    description: >-
+      Create a dataset group that references the new dataset by its ARN.
+    operationId: createDatasetGroup
+    requestBody:
+      contentType: application/json
+      payload:
+        DatasetGroupName: $inputs.datasetGroupName
+        Domain: $inputs.domain
+        DatasetArns:
+        - $steps.createDataset.outputs.datasetArn
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      datasetGroupArn: $response.body#/DatasetGroupArn
+  - stepId: createPredictor
+    description: >-
+      Train a predictor using the supplied input and featurization
+      configuration referencing the dataset group.
+    operationId: createPredictor
+    requestBody:
+      contentType: application/json
+      payload:
+        PredictorName: $inputs.predictorName
+        ForecastHorizon: $inputs.forecastHorizon
+        InputDataConfig: $inputs.inputDataConfig
+        FeaturizationConfig: $inputs.featurizationConfig
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      predictorArn: $response.body#/PredictorArn
+  - stepId: createForecast
+    description: >-
+      Generate a forecast from the new predictor.
+    operationId: createForecast
+    requestBody:
+      contentType: application/json
+      payload:
+        ForecastName: $inputs.forecastName
+        PredictorArn: $steps.createPredictor.outputs.predictorArn
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      forecastArn: $response.body#/ForecastArn
+  outputs:
+    datasetArn: $steps.createDataset.outputs.datasetArn
+    datasetGroupArn: $steps.createDatasetGroup.outputs.datasetGroupArn
+    predictorArn: $steps.createPredictor.outputs.predictorArn
+    forecastArn: $steps.createForecast.outputs.forecastArn

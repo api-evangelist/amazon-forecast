@@ -1,0 +1,139 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Forecast Predict and Forecast
+  summary: Train a predictor, wait until ACTIVE, then create a forecast and wait until ACTIVE.
+  description: >-
+    Chains the two long-running machine-learning stages of Amazon Forecast. The
+    workflow creates a predictor and polls the predictor listing until training
+    is ACTIVE, then creates a forecast from that predictor and polls the forecast
+    listing until the forecast is ACTIVE. Because the Forecast description only
+    exposes a describe operation for datasets, predictor and forecast status are
+    read from their respective list operations. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: amazonForecastApi
+  url: ../openapi/amazon-forecast-openapi.yml
+  type: openapi
+workflows:
+- workflowId: predict-and-forecast
+  summary: Train a predictor and generate a forecast, waiting for each to be ACTIVE.
+  description: >-
+    Creates a predictor, polls listPredictors until it is ACTIVE, creates a
+    forecast from it, and polls listForecasts until the forecast is ACTIVE.
+  inputs:
+    type: object
+    required:
+    - predictorName
+    - forecastHorizon
+    - inputDataConfig
+    - featurizationConfig
+    - forecastName
+    properties:
+      predictorName:
+        type: string
+        description: A name for the predictor.
+      forecastHorizon:
+        type: integer
+        description: The number of time-steps to predict.
+      inputDataConfig:
+        type: object
+        description: The dataset group and supplementary features for training.
+      featurizationConfig:
+        type: object
+        description: The featurization configuration for the predictor.
+      forecastName:
+        type: string
+        description: A name for the forecast to generate.
+      forecastTypes:
+        type: array
+        description: The quantiles at which probabilistic forecasts are generated.
+        items:
+          type: string
+  steps:
+  - stepId: createPredictor
+    description: >-
+      Create the predictor and start training using the supplied configuration.
+    operationId: createPredictor
+    requestBody:
+      contentType: application/json
+      payload:
+        PredictorName: $inputs.predictorName
+        ForecastHorizon: $inputs.forecastHorizon
+        InputDataConfig: $inputs.inputDataConfig
+        FeaturizationConfig: $inputs.featurizationConfig
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      predictorArn: $response.body#/PredictorArn
+  - stepId: waitForPredictorActive
+    description: >-
+      List predictors and confirm the newly created predictor has reached the
+      ACTIVE status. Repeat this step while training is still in progress.
+    operationId: listPredictors
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.Predictors[?(@.PredictorArn == "$steps.createPredictor.outputs.predictorArn")].Status contains "ACTIVE"
+      type: jsonpath
+    onSuccess:
+    - name: predictorActive
+      type: goto
+      stepId: createForecast
+      criteria:
+      - context: $response.body
+        condition: $.Predictors[?(@.PredictorArn == "$steps.createPredictor.outputs.predictorArn")].Status contains "ACTIVE"
+        type: jsonpath
+    onFailure:
+    - name: stillTraining
+      type: retry
+      retryAfter: 60
+      retryLimit: 30
+      criteria:
+      - condition: $statusCode == 200
+    outputs:
+      predictors: $response.body#/Predictors
+  - stepId: createForecast
+    description: >-
+      Create a forecast from the now-ACTIVE predictor.
+    operationId: createForecast
+    requestBody:
+      contentType: application/json
+      payload:
+        ForecastName: $inputs.forecastName
+        PredictorArn: $steps.createPredictor.outputs.predictorArn
+        ForecastTypes: $inputs.forecastTypes
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      forecastArn: $response.body#/ForecastArn
+  - stepId: waitForForecastActive
+    description: >-
+      List forecasts and confirm the newly created forecast has reached the
+      ACTIVE status. Repeat this step while the forecast is still generating.
+    operationId: listForecasts
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.Forecasts[?(@.ForecastArn == "$steps.createForecast.outputs.forecastArn")].Status contains "ACTIVE"
+      type: jsonpath
+    onSuccess:
+    - name: forecastActive
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.Forecasts[?(@.ForecastArn == "$steps.createForecast.outputs.forecastArn")].Status contains "ACTIVE"
+        type: jsonpath
+    onFailure:
+    - name: stillGenerating
+      type: retry
+      retryAfter: 60
+      retryLimit: 30
+      criteria:
+      - condition: $statusCode == 200
+    outputs:
+      forecasts: $response.body#/Forecasts
+  outputs:
+    predictorArn: $steps.createPredictor.outputs.predictorArn
+    forecastArn: $steps.createForecast.outputs.forecastArn

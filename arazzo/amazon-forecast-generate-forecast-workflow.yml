@@ -1,0 +1,108 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Forecast Generate Forecast
+  summary: Create a forecast from a predictor, poll until ACTIVE, and tag it.
+  description: >-
+    Generates an Amazon Forecast forecast for each item in the target
+    time-series dataset using a trained predictor. The workflow creates the
+    forecast, polls the forecast listing until the matching forecast reports an
+    ACTIVE status, and then applies metadata tags. Because the Forecast
+    description only exposes a describe operation for datasets, forecast status
+    is read from listForecasts. Every step spells out its request inline so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: amazonForecastApi
+  url: ../openapi/amazon-forecast-openapi.yml
+  type: openapi
+workflows:
+- workflowId: generate-forecast
+  summary: Create an Amazon Forecast forecast and wait until it is ACTIVE.
+  description: >-
+    Creates a forecast from a trained predictor, polls listForecasts until the
+    matching forecast status is ACTIVE, and then associates the supplied tags
+    with the forecast.
+  inputs:
+    type: object
+    required:
+    - forecastName
+    - predictorArn
+    properties:
+      forecastName:
+        type: string
+        description: A name for the forecast.
+      predictorArn:
+        type: string
+        description: The ARN of the trained predictor used to generate the forecast.
+      forecastTypes:
+        type: array
+        description: The quantiles at which probabilistic forecasts are generated.
+        items:
+          type: string
+      tags:
+        type: array
+        description: The metadata tags to apply once the forecast is ACTIVE.
+        items:
+          type: object
+  steps:
+  - stepId: createForecast
+    description: >-
+      Create the forecast from the trained predictor.
+    operationId: createForecast
+    requestBody:
+      contentType: application/json
+      payload:
+        ForecastName: $inputs.forecastName
+        PredictorArn: $inputs.predictorArn
+        ForecastTypes: $inputs.forecastTypes
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      forecastArn: $response.body#/ForecastArn
+  - stepId: waitForActive
+    description: >-
+      List forecasts and confirm the newly created forecast has reached the
+      ACTIVE status. Repeat this step while the forecast is still generating.
+    operationId: listForecasts
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.Forecasts[?(@.ForecastArn == "$steps.createForecast.outputs.forecastArn")].Status contains "ACTIVE"
+      type: jsonpath
+    onSuccess:
+    - name: forecastActive
+      type: goto
+      stepId: tagForecast
+      criteria:
+      - context: $response.body
+        condition: $.Forecasts[?(@.ForecastArn == "$steps.createForecast.outputs.forecastArn")].Status contains "ACTIVE"
+        type: jsonpath
+    onFailure:
+    - name: stillGenerating
+      type: retry
+      retryAfter: 60
+      retryLimit: 30
+      criteria:
+      - condition: $statusCode == 200
+    outputs:
+      forecasts: $response.body#/Forecasts
+  - stepId: tagForecast
+    description: >-
+      Apply the supplied metadata tags to the now-ACTIVE forecast.
+    operationId: tagResource
+    parameters:
+    - name: resourceArn
+      in: path
+      value: $steps.createForecast.outputs.forecastArn
+    requestBody:
+      contentType: application/json
+      payload:
+        Tags: $inputs.tags
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      taggedArn: $steps.createForecast.outputs.forecastArn
+  outputs:
+    forecastArn: $steps.createForecast.outputs.forecastArn
+    forecasts: $steps.waitForActive.outputs.forecasts

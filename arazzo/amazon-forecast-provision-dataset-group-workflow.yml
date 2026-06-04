@@ -1,0 +1,107 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Forecast Provision Dataset Group
+  summary: Create a dataset group, poll the listing until it is ACTIVE, and tag it.
+  description: >-
+    Creates an Amazon Forecast dataset group, which holds a collection of
+    related datasets, then polls the dataset group listing until the new group
+    reports an ACTIVE status, and finally applies metadata tags. Because the
+    Forecast description only exposes a describe operation for datasets, the
+    workflow polls listDatasetGroups and matches on the returned ARN to read the
+    group status. Every step spells out its request inline so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: amazonForecastApi
+  url: ../openapi/amazon-forecast-openapi.yml
+  type: openapi
+workflows:
+- workflowId: provision-dataset-group
+  summary: Create an Amazon Forecast dataset group and wait until it is ACTIVE.
+  description: >-
+    Creates a dataset group, polls listDatasetGroups until the matching group
+    status is ACTIVE, and then associates the supplied tags with the group.
+  inputs:
+    type: object
+    required:
+    - datasetGroupName
+    - domain
+    properties:
+      datasetGroupName:
+        type: string
+        description: A name for the dataset group.
+      domain:
+        type: string
+        description: The domain associated with the dataset group.
+      datasetArns:
+        type: array
+        description: An array of dataset ARNs to include in the group.
+        items:
+          type: string
+      tags:
+        type: array
+        description: The metadata tags to apply once the group is ACTIVE.
+        items:
+          type: object
+  steps:
+  - stepId: createDatasetGroup
+    description: >-
+      Create the dataset group using the supplied name, domain and any member
+      dataset ARNs.
+    operationId: createDatasetGroup
+    requestBody:
+      contentType: application/json
+      payload:
+        DatasetGroupName: $inputs.datasetGroupName
+        Domain: $inputs.domain
+        DatasetArns: $inputs.datasetArns
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      datasetGroupArn: $response.body#/DatasetGroupArn
+  - stepId: waitForActive
+    description: >-
+      List dataset groups and confirm the newly created group has reached the
+      ACTIVE status. Repeat this step while the status is still being created.
+    operationId: listDatasetGroups
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.DatasetGroups[?(@.DatasetGroupArn == "$steps.createDatasetGroup.outputs.datasetGroupArn")].Status contains "ACTIVE"
+      type: jsonpath
+    onSuccess:
+    - name: groupActive
+      type: goto
+      stepId: tagDatasetGroup
+      criteria:
+      - context: $response.body
+        condition: $.DatasetGroups[?(@.DatasetGroupArn == "$steps.createDatasetGroup.outputs.datasetGroupArn")].Status contains "ACTIVE"
+        type: jsonpath
+    onFailure:
+    - name: stillCreating
+      type: retry
+      retryAfter: 30
+      retryLimit: 20
+      criteria:
+      - condition: $statusCode == 200
+    outputs:
+      datasetGroups: $response.body#/DatasetGroups
+  - stepId: tagDatasetGroup
+    description: >-
+      Apply the supplied metadata tags to the now-ACTIVE dataset group.
+    operationId: tagResource
+    parameters:
+    - name: resourceArn
+      in: path
+      value: $steps.createDatasetGroup.outputs.datasetGroupArn
+    requestBody:
+      contentType: application/json
+      payload:
+        Tags: $inputs.tags
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      taggedArn: $steps.createDatasetGroup.outputs.datasetGroupArn
+  outputs:
+    datasetGroupArn: $steps.createDatasetGroup.outputs.datasetGroupArn
+    datasetGroups: $steps.waitForActive.outputs.datasetGroups

@@ -1,0 +1,118 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Forecast Train Predictor
+  summary: Create a predictor, poll the listing until it is ACTIVE, and tag it.
+  description: >-
+    Trains an Amazon Forecast predictor (an ML model) on a dataset group and
+    waits for training to complete. The workflow creates the predictor, polls
+    the predictor listing until the matching predictor reports an ACTIVE status,
+    and then applies metadata tags. Because the Forecast description only exposes
+    a describe operation for datasets, predictor status is read from
+    listPredictors. Every step spells out its request inline so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: amazonForecastApi
+  url: ../openapi/amazon-forecast-openapi.yml
+  type: openapi
+workflows:
+- workflowId: train-predictor
+  summary: Create an Amazon Forecast predictor and wait until training is ACTIVE.
+  description: >-
+    Creates a predictor, polls listPredictors until the matching predictor
+    status is ACTIVE, and then associates the supplied tags with the predictor.
+  inputs:
+    type: object
+    required:
+    - predictorName
+    - forecastHorizon
+    - inputDataConfig
+    - featurizationConfig
+    properties:
+      predictorName:
+        type: string
+        description: A name for the predictor.
+      forecastHorizon:
+        type: integer
+        description: The number of time-steps to predict.
+      algorithmArn:
+        type: string
+        description: The ARN of the algorithm to use for training.
+      performAutoML:
+        type: boolean
+        description: Whether to let Forecast select the optimal algorithm.
+      inputDataConfig:
+        type: object
+        description: The dataset group and supplementary features for training.
+      featurizationConfig:
+        type: object
+        description: The featurization configuration for the predictor.
+      tags:
+        type: array
+        description: The metadata tags to apply once the predictor is ACTIVE.
+        items:
+          type: object
+  steps:
+  - stepId: createPredictor
+    description: >-
+      Create the predictor and start training using the supplied configuration.
+    operationId: createPredictor
+    requestBody:
+      contentType: application/json
+      payload:
+        PredictorName: $inputs.predictorName
+        ForecastHorizon: $inputs.forecastHorizon
+        AlgorithmArn: $inputs.algorithmArn
+        PerformAutoML: $inputs.performAutoML
+        InputDataConfig: $inputs.inputDataConfig
+        FeaturizationConfig: $inputs.featurizationConfig
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      predictorArn: $response.body#/PredictorArn
+  - stepId: waitForActive
+    description: >-
+      List predictors and confirm the newly created predictor has reached the
+      ACTIVE status. Repeat this step while training is still in progress.
+    operationId: listPredictors
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.Predictors[?(@.PredictorArn == "$steps.createPredictor.outputs.predictorArn")].Status contains "ACTIVE"
+      type: jsonpath
+    onSuccess:
+    - name: predictorActive
+      type: goto
+      stepId: tagPredictor
+      criteria:
+      - context: $response.body
+        condition: $.Predictors[?(@.PredictorArn == "$steps.createPredictor.outputs.predictorArn")].Status contains "ACTIVE"
+        type: jsonpath
+    onFailure:
+    - name: stillTraining
+      type: retry
+      retryAfter: 60
+      retryLimit: 30
+      criteria:
+      - condition: $statusCode == 200
+    outputs:
+      predictors: $response.body#/Predictors
+  - stepId: tagPredictor
+    description: >-
+      Apply the supplied metadata tags to the now-ACTIVE predictor.
+    operationId: tagResource
+    parameters:
+    - name: resourceArn
+      in: path
+      value: $steps.createPredictor.outputs.predictorArn
+    requestBody:
+      contentType: application/json
+      payload:
+        Tags: $inputs.tags
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      taggedArn: $steps.createPredictor.outputs.predictorArn
+  outputs:
+    predictorArn: $steps.createPredictor.outputs.predictorArn
+    predictors: $steps.waitForActive.outputs.predictors

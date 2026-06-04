@@ -1,0 +1,117 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Forecast Register Dataset to Group
+  summary: Create a dataset, wait until ACTIVE, then create a dataset group containing it.
+  description: >-
+    Bootstraps a complete dataset-plus-group structure in one pass. The workflow
+    creates a new dataset, polls describeDataset until the dataset reaches the
+    ACTIVE status, and then creates a dataset group whose DatasetArns reference
+    the freshly created dataset so the two are wired together. Every step spells
+    out its request inline so the flow can be read and executed without opening
+    the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: amazonForecastApi
+  url: ../openapi/amazon-forecast-openapi.yml
+  type: openapi
+workflows:
+- workflowId: register-dataset-to-group
+  summary: Create a dataset and attach it to a new dataset group once it is ACTIVE.
+  description: >-
+    Creates a dataset, polls describeDataset until the dataset is ACTIVE, and
+    then creates a dataset group that includes the new dataset's ARN.
+  inputs:
+    type: object
+    required:
+    - datasetName
+    - domain
+    - datasetType
+    - schema
+    - datasetGroupName
+    properties:
+      datasetName:
+        type: string
+        description: A name for the dataset.
+      domain:
+        type: string
+        description: The domain shared by the dataset and dataset group.
+      datasetType:
+        type: string
+        description: The dataset type (e.g. TARGET_TIME_SERIES).
+      dataFrequency:
+        type: string
+        description: The frequency of data collection.
+      schema:
+        type: object
+        description: The schema for the dataset.
+      datasetGroupName:
+        type: string
+        description: A name for the dataset group to create.
+  steps:
+  - stepId: createDataset
+    description: >-
+      Create the dataset that will be registered into the dataset group.
+    operationId: createDataset
+    requestBody:
+      contentType: application/json
+      payload:
+        DatasetName: $inputs.datasetName
+        Domain: $inputs.domain
+        DatasetType: $inputs.datasetType
+        DataFrequency: $inputs.dataFrequency
+        Schema: $inputs.schema
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      datasetArn: $response.body#/DatasetArn
+  - stepId: waitForDatasetActive
+    description: >-
+      Describe the dataset and confirm it has reached the ACTIVE status. Repeat
+      this step while the dataset is still being created.
+    operationId: describeDataset
+    parameters:
+    - name: datasetArn
+      in: path
+      value: $steps.createDataset.outputs.datasetArn
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.Status == "ACTIVE"
+      type: jsonpath
+    onSuccess:
+    - name: datasetActive
+      type: goto
+      stepId: createDatasetGroup
+      criteria:
+      - context: $response.body
+        condition: $.Status == "ACTIVE"
+        type: jsonpath
+    onFailure:
+    - name: stillCreating
+      type: retry
+      retryAfter: 30
+      retryLimit: 20
+      criteria:
+      - context: $response.body
+        condition: $.Status != "ACTIVE"
+        type: jsonpath
+    outputs:
+      status: $response.body#/Status
+  - stepId: createDatasetGroup
+    description: >-
+      Create a dataset group that references the new dataset by its ARN.
+    operationId: createDatasetGroup
+    requestBody:
+      contentType: application/json
+      payload:
+        DatasetGroupName: $inputs.datasetGroupName
+        Domain: $inputs.domain
+        DatasetArns:
+        - $steps.createDataset.outputs.datasetArn
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      datasetGroupArn: $response.body#/DatasetGroupArn
+  outputs:
+    datasetArn: $steps.createDataset.outputs.datasetArn
+    datasetGroupArn: $steps.createDatasetGroup.outputs.datasetGroupArn
