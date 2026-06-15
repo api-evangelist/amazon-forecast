@@ -1,0 +1,302 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Forecast API",
+    "version": "2018-06-26"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Datasets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Datasets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://forecast.{region}.amazonaws.com/datasets",
+            "params": [
+              {
+                "name": "maxResults",
+                "value": "",
+                "type": "query",
+                "description": "Maximum results to return."
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token."
+              }
+            ]
+          },
+          "docs": "Returns a list of datasets created using CreateDataset."
+        },
+        {
+          "info": {
+            "name": "Create Dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://forecast.{region}.amazonaws.com/datasets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an Amazon Forecast dataset."
+        },
+        {
+          "info": {
+            "name": "Describe Dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://forecast.{region}.amazonaws.com/describe/dataset/:datasetArn",
+            "params": [
+              {
+                "name": "datasetArn",
+                "value": "",
+                "type": "path",
+                "description": "ARN of the dataset."
+              }
+            ]
+          },
+          "docs": "Describes an Amazon Forecast dataset."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Dataset Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Dataset Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://forecast.{region}.amazonaws.com/dataset-groups",
+            "params": [
+              {
+                "name": "maxResults",
+                "value": "",
+                "type": "query",
+                "description": "Maximum results."
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token."
+              }
+            ]
+          },
+          "docs": "Returns a list of dataset groups."
+        },
+        {
+          "info": {
+            "name": "Create Dataset Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://forecast.{region}.amazonaws.com/dataset-groups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a dataset group, which holds a collection of related datasets."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Predictors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Predictors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://forecast.{region}.amazonaws.com/predictors",
+            "params": [
+              {
+                "name": "maxResults",
+                "value": "",
+                "type": "query",
+                "description": "Maximum results."
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token."
+              }
+            ]
+          },
+          "docs": "Returns a list of predictors."
+        },
+        {
+          "info": {
+            "name": "Create Predictor",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://forecast.{region}.amazonaws.com/predictors",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an Amazon Forecast predictor (ML model) trained on a dataset group."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Forecasts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Forecasts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://forecast.{region}.amazonaws.com/forecasts",
+            "params": [
+              {
+                "name": "maxResults",
+                "value": "",
+                "type": "query",
+                "description": "Maximum results."
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token."
+              }
+            ]
+          },
+          "docs": "Returns a list of forecasts."
+        },
+        {
+          "info": {
+            "name": "Create Forecast",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://forecast.{region}.amazonaws.com/forecasts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a forecast for each item in the TARGET_TIME_SERIES dataset."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Export Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Forecast Export Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://forecast.{region}.amazonaws.com/forecast-export-jobs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Exports a forecast created by CreateForecast to your Amazon S3 bucket."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Tags For Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://forecast.{region}.amazonaws.com/tags/:resourceArn",
+            "params": [
+              {
+                "name": "resourceArn",
+                "value": "",
+                "type": "path",
+                "description": "ARN of the resource."
+              }
+            ]
+          },
+          "docs": "Lists the tags for an Amazon Forecast resource."
+        },
+        {
+          "info": {
+            "name": "Tag Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://forecast.{region}.amazonaws.com/tags/:resourceArn",
+            "params": [
+              {
+                "name": "resourceArn",
+                "value": "",
+                "type": "path",
+                "description": "ARN of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Associates the specified tags to a resource."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

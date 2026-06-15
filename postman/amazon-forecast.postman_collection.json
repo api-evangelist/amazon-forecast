@@ -1,0 +1,2671 @@
+{
+  "info": {
+    "_postman_id": "f83dcd6e-4ae3-4ecf-8a45-a9ac20085452",
+    "name": "Amazon Forecast API",
+    "description": "Amazon Forecast is a fully managed service that uses machine learning to deliver highly accurate time-series forecasts.\n\nContact Support:\n Name: AWS Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:03:57.000Z",
+    "updatedAt": "2026-06-05T15:03:57.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f83dcd6e-4ae3-4ecf-8a45-a9ac20085452"
+  },
+  "item": [
+    {
+      "name": "datasets",
+      "item": [
+        {
+          "name": "Create Dataset",
+          "id": "a1136412-f6cc-4c9b-8b31-2c90df9e6fa2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"DatasetName\": \"<string>\",\n  \"Domain\": \"<string>\",\n  \"DatasetType\": \"<string>\",\n  \"Schema\": {},\n  \"DataFrequency\": \"<string>\",\n  \"Tags\": [\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    },\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/datasets",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "datasets"
+              ]
+            },
+            "description": "Creates an Amazon Forecast dataset."
+          },
+          "response": [
+            {
+              "id": "b3bdd2b5-4083-41ba-b464-8efaf14a1232",
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DatasetName\": \"<string>\",\n  \"Domain\": \"<string>\",\n  \"DatasetType\": \"<string>\",\n  \"Schema\": {},\n  \"DataFrequency\": \"<string>\",\n  \"Tags\": [\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    },\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/datasets",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "datasets"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"DatasetArn\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:03:58.000Z",
+              "updatedAt": "2026-06-05T15:03:58.000Z",
+              "uid": "35240-b3bdd2b5-4083-41ba-b464-8efaf14a1232"
+            },
+            {
+              "id": "5be37411-8814-4656-8395-dc98e599a86b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DatasetName\": \"<string>\",\n  \"Domain\": \"<string>\",\n  \"DatasetType\": \"<string>\",\n  \"Schema\": {},\n  \"DataFrequency\": \"<string>\",\n  \"Tags\": [\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    },\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/datasets",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "datasets"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Message\": \"<string>\",\n  \"Code\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:03:58.000Z",
+              "updatedAt": "2026-06-05T15:03:58.000Z",
+              "uid": "35240-5be37411-8814-4656-8395-dc98e599a86b"
+            },
+            {
+              "id": "560a2469-0507-401a-95ae-391b2107ae36",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DatasetName\": \"<string>\",\n  \"Domain\": \"<string>\",\n  \"DatasetType\": \"<string>\",\n  \"Schema\": {},\n  \"DataFrequency\": \"<string>\",\n  \"Tags\": [\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    },\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/datasets",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "datasets"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Message\": \"<string>\",\n  \"Code\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:03:58.000Z",
+              "updatedAt": "2026-06-05T15:03:58.000Z",
+              "uid": "35240-560a2469-0507-401a-95ae-391b2107ae36"
+            }
+          ],
+          "createdAt": "2026-06-05T15:03:58.000Z",
+          "updatedAt": "2026-06-05T15:03:58.000Z",
+          "uid": "35240-a1136412-f6cc-4c9b-8b31-2c90df9e6fa2"
+        },
+        {
+          "name": "List Datasets",
+          "id": "9f1eeda0-02b3-41bd-a607-d4bedcabd775",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/datasets?maxResults=<integer>&nextToken=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "datasets"
+              ],
+              "query": [
+                {
+                  "description": "Maximum results to return.",
+                  "key": "maxResults",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Pagination token.",
+                  "key": "nextToken",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Returns a list of datasets created using CreateDataset."
+          },
+          "response": [
+            {
+              "id": "ae78502d-2ed2-4399-8ed3-9f34a4826543",
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/datasets?maxResults=<integer>&nextToken=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "datasets"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum results to return.",
+                      "key": "maxResults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Pagination token.",
+                      "key": "nextToken",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Datasets\": [\n    {\n      \"DatasetArn\": \"<string>\",\n      \"DatasetName\": \"<string>\",\n      \"DatasetType\": \"<string>\",\n      \"Domain\": \"<string>\",\n      \"Status\": \"<string>\",\n      \"CreationTime\": \"<dateTime>\",\n      \"LastModificationTime\": \"<dateTime>\"\n    },\n    {\n      \"DatasetArn\": \"<string>\",\n      \"DatasetName\": \"<string>\",\n      \"DatasetType\": \"<string>\",\n      \"Domain\": \"<string>\",\n      \"Status\": \"<string>\",\n      \"CreationTime\": \"<dateTime>\",\n      \"LastModificationTime\": \"<dateTime>\"\n    }\n  ],\n  \"NextToken\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:03:58.000Z",
+              "updatedAt": "2026-06-05T15:03:58.000Z",
+              "uid": "35240-ae78502d-2ed2-4399-8ed3-9f34a4826543"
+            },
+            {
+              "id": "3d5204dc-4e0e-4b0e-84f5-562af9b015c1",
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/datasets?maxResults=<integer>&nextToken=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "datasets"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum results to return.",
+                      "key": "maxResults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Pagination token.",
+                      "key": "nextToken",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Message\": \"<string>\",\n  \"Code\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:03:58.000Z",
+              "updatedAt": "2026-06-05T15:03:58.000Z",
+              "uid": "35240-3d5204dc-4e0e-4b0e-84f5-562af9b015c1"
+            },
+            {
+              "id": "cfd1b3ab-eeb2-460a-8ec0-1f146adb9f42",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/datasets?maxResults=<integer>&nextToken=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "datasets"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum results to return.",
+                      "key": "maxResults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Pagination token.",
+                      "key": "nextToken",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Message\": \"<string>\",\n  \"Code\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:03:58.000Z",
+              "updatedAt": "2026-06-05T15:03:58.000Z",
+              "uid": "35240-cfd1b3ab-eeb2-460a-8ec0-1f146adb9f42"
+            }
+          ],
+          "createdAt": "2026-06-05T15:03:58.000Z",
+          "updatedAt": "2026-06-05T15:03:58.000Z",
+          "uid": "35240-9f1eeda0-02b3-41bd-a607-d4bedcabd775"
+        }
+      ],
+      "id": "9e4274ee-0a9d-43bd-ab0f-15b367eb56c6",
+      "createdAt": "2026-06-05T15:03:58.000Z",
+      "updatedAt": "2026-06-05T15:03:58.000Z",
+      "uid": "35240-9e4274ee-0a9d-43bd-ab0f-15b367eb56c6"
+    },
+    {
+      "name": "describe",
+      "item": [
+        {
+          "name": "dataset",
+          "item": [
+            {
+              "name": "{datasetArn}",
+              "item": [
+                {
+                  "name": "Describe Dataset",
+                  "id": "018e1f19-bcb4-4d92-a747-4f059f9ac5a5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/describe/dataset/:datasetArn",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "describe",
+                        "dataset",
+                        ":datasetArn"
+                      ],
+                      "variable": [
+                        {
+                          "id": "11f2ec47-1b79-4c7c-8011-3fb350c65861",
+                          "key": "datasetArn",
+                          "value": "<string>",
+                          "description": "(Required) ARN of the dataset."
+                        }
+                      ]
+                    },
+                    "description": "Describes an Amazon Forecast dataset."
+                  },
+                  "response": [
+                    {
+                      "id": "f1867d3f-1e85-4bc5-8c40-3a24349fdf2c",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/describe/dataset/:datasetArn",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "describe",
+                            "dataset",
+                            ":datasetArn"
+                          ],
+                          "variable": [
+                            {
+                              "key": "datasetArn"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"DatasetName\": \"<string>\",\n  \"Domain\": \"RETAIL\",\n  \"DatasetType\": \"ITEM_METADATA\",\n  \"Schema\": {},\n  \"DatasetArn\": \"<string>\",\n  \"DataFrequency\": \"<string>\",\n  \"EncryptionConfig\": {},\n  \"Status\": \"<string>\",\n  \"DatasetArn_\": \"<string>\",\n  \"CreationTime\": \"<dateTime>\",\n  \"LastModificationTime\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-06-05T15:03:58.000Z",
+                      "updatedAt": "2026-06-05T15:03:58.000Z",
+                      "uid": "35240-f1867d3f-1e85-4bc5-8c40-3a24349fdf2c"
+                    },
+                    {
+                      "id": "eadccb65-ea47-489e-a7ce-7500e37fe4ba",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/describe/dataset/:datasetArn",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "describe",
+                            "dataset",
+                            ":datasetArn"
+                          ],
+                          "variable": [
+                            {
+                              "key": "datasetArn"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"Message\": \"<string>\",\n  \"Code\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:03:58.000Z",
+                      "updatedAt": "2026-06-05T15:03:58.000Z",
+                      "uid": "35240-eadccb65-ea47-489e-a7ce-7500e37fe4ba"
+                    },
+                    {
+                      "id": "4c4ca8e4-c9e3-4830-9bc1-ac41d1fd649f",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/describe/dataset/:datasetArn",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "describe",
+                            "dataset",
+                            ":datasetArn"
+                          ],
+                          "variable": [
+                            {
+                              "key": "datasetArn"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"Message\": \"<string>\",\n  \"Code\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:03:58.000Z",
+                      "updatedAt": "2026-06-05T15:03:58.000Z",
+                      "uid": "35240-4c4ca8e4-c9e3-4830-9bc1-ac41d1fd649f"
+                    },
+                    {
+                      "id": "a84b29a3-2238-47e0-a687-b98664406777",
+                      "name": "Internal Server Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/describe/dataset/:datasetArn",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "describe",
+                            "dataset",
+                            ":datasetArn"
+                          ],
+                          "variable": [
+                            {
+                              "key": "datasetArn"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"Message\": \"<string>\",\n  \"Code\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:03:58.000Z",
+                      "updatedAt": "2026-06-05T15:03:58.000Z",
+                      "uid": "35240-a84b29a3-2238-47e0-a687-b98664406777"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:03:58.000Z",
+                  "updatedAt": "2026-06-05T15:03:58.000Z",
+                  "uid": "35240-018e1f19-bcb4-4d92-a747-4f059f9ac5a5"
+                }
+              ],
+              "id": "d12c7f0d-1607-486a-8dc0-290e2d6682d4",
+              "createdAt": "2026-06-05T15:03:58.000Z",
+              "updatedAt": "2026-06-05T15:03:58.000Z",
+              "uid": "35240-d12c7f0d-1607-486a-8dc0-290e2d6682d4"
+            }
+          ],
+          "id": "407e9207-e64a-4d1a-938b-f46828934f29",
+          "createdAt": "2026-06-05T15:03:58.000Z",
+          "updatedAt": "2026-06-05T15:03:58.000Z",
+          "uid": "35240-407e9207-e64a-4d1a-938b-f46828934f29"
+        }
+      ],
+      "id": "59cb73ec-efab-4554-afb1-a792e1d8a6cc",
+      "createdAt": "2026-06-05T15:03:58.000Z",
+      "updatedAt": "2026-06-05T15:03:58.000Z",
+      "uid": "35240-59cb73ec-efab-4554-afb1-a792e1d8a6cc"
+    },
+    {
+      "name": "dataset-groups",
+      "item": [
+        {
+          "name": "Create Dataset Group",
+          "id": "558f4e7b-d791-46cf-a2c5-91408f41b581",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"DatasetGroupName\": \"<string>\",\n  \"Domain\": \"<string>\",\n  \"DatasetArns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"Tags\": [\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    },\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/dataset-groups",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "dataset-groups"
+              ]
+            },
+            "description": "Creates a dataset group, which holds a collection of related datasets."
+          },
+          "response": [
+            {
+              "id": "1ac73322-bb71-40c4-9a66-3d749972373c",
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DatasetGroupName\": \"<string>\",\n  \"Domain\": \"<string>\",\n  \"DatasetArns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"Tags\": [\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    },\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/dataset-groups",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dataset-groups"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"DatasetGroupArn\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:03:58.000Z",
+              "updatedAt": "2026-06-05T15:03:58.000Z",
+              "uid": "35240-1ac73322-bb71-40c4-9a66-3d749972373c"
+            },
+            {
+              "id": "0edd2a22-6b75-4ba1-9390-bd20ea9b5a25",
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DatasetGroupName\": \"<string>\",\n  \"Domain\": \"<string>\",\n  \"DatasetArns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"Tags\": [\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    },\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/dataset-groups",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dataset-groups"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Message\": \"<string>\",\n  \"Code\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:03:58.000Z",
+              "updatedAt": "2026-06-05T15:03:58.000Z",
+              "uid": "35240-0edd2a22-6b75-4ba1-9390-bd20ea9b5a25"
+            },
+            {
+              "id": "4f9496dd-3da9-41df-9c77-6adedd1d7949",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DatasetGroupName\": \"<string>\",\n  \"Domain\": \"<string>\",\n  \"DatasetArns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"Tags\": [\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    },\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/dataset-groups",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dataset-groups"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Message\": \"<string>\",\n  \"Code\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:03:58.000Z",
+              "updatedAt": "2026-06-05T15:03:58.000Z",
+              "uid": "35240-4f9496dd-3da9-41df-9c77-6adedd1d7949"
+            }
+          ],
+          "createdAt": "2026-06-05T15:03:58.000Z",
+          "updatedAt": "2026-06-05T15:03:58.000Z",
+          "uid": "35240-558f4e7b-d791-46cf-a2c5-91408f41b581"
+        },
+        {
+          "name": "List Dataset Groups",
+          "id": "ac66d682-b9bf-49cd-a55d-bd16bf21d41b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/dataset-groups?maxResults=<integer>&nextToken=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "dataset-groups"
+              ],
+              "query": [
+                {
+                  "description": "Maximum results.",
+                  "key": "maxResults",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Pagination token.",
+                  "key": "nextToken",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Returns a list of dataset groups."
+          },
+          "response": [
+            {
+              "id": "d4190cba-e430-4ee2-98d7-f9bb5802cd0c",
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/dataset-groups?maxResults=<integer>&nextToken=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dataset-groups"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum results.",
+                      "key": "maxResults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Pagination token.",
+                      "key": "nextToken",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"DatasetGroups\": [\n    {\n      \"DatasetGroupArn\": \"<string>\",\n      \"DatasetGroupName\": \"<string>\",\n      \"Domain\": \"<string>\",\n      \"Status\": \"<string>\",\n      \"CreationTime\": \"<dateTime>\",\n      \"LastModificationTime\": \"<dateTime>\"\n    },\n    {\n      \"DatasetGroupArn\": \"<string>\",\n      \"DatasetGroupName\": \"<string>\",\n      \"Domain\": \"<string>\",\n      \"Status\": \"<string>\",\n      \"CreationTime\": \"<dateTime>\",\n      \"LastModificationTime\": \"<dateTime>\"\n    }\n  ],\n  \"NextToken\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:03:58.000Z",
+              "updatedAt": "2026-06-05T15:03:58.000Z",
+              "uid": "35240-d4190cba-e430-4ee2-98d7-f9bb5802cd0c"
+            },
+            {
+              "id": "46967ff4-1f9b-4aa0-bdd9-8b180d6e11dc",
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/dataset-groups?maxResults=<integer>&nextToken=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dataset-groups"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum results.",
+                      "key": "maxResults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Pagination token.",
+                      "key": "nextToken",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Message\": \"<string>\",\n  \"Code\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:03:58.000Z",
+              "updatedAt": "2026-06-05T15:03:58.000Z",
+              "uid": "35240-46967ff4-1f9b-4aa0-bdd9-8b180d6e11dc"
+            },
+            {
+              "id": "898a5b4c-aa4e-4484-975a-6103f3c51508",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/dataset-groups?maxResults=<integer>&nextToken=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dataset-groups"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum results.",
+                      "key": "maxResults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Pagination token.",
+                      "key": "nextToken",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Message\": \"<string>\",\n  \"Code\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:03:58.000Z",
+              "updatedAt": "2026-06-05T15:03:58.000Z",
+              "uid": "35240-898a5b4c-aa4e-4484-975a-6103f3c51508"
+            }
+          ],
+          "createdAt": "2026-06-05T15:03:58.000Z",
+          "updatedAt": "2026-06-05T15:03:58.000Z",
+          "uid": "35240-ac66d682-b9bf-49cd-a55d-bd16bf21d41b"
+        }
+      ],
+      "id": "8aa93be0-1d58-4aee-a6aa-74e30217875e",
+      "createdAt": "2026-06-05T15:03:58.000Z",
+      "updatedAt": "2026-06-05T15:03:58.000Z",
+      "uid": "35240-8aa93be0-1d58-4aee-a6aa-74e30217875e"
+    },
+    {
+      "name": "predictors",
+      "item": [
+        {
+          "name": "Create Predictor",
+          "id": "f09251d9-590c-4248-8b92-ef82d1a11d9a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"PredictorName\": \"<string>\",\n  \"ForecastHorizon\": \"<integer>\",\n  \"InputDataConfig\": {},\n  \"FeaturizationConfig\": {},\n  \"AlgorithmArn\": \"<string>\",\n  \"ForecastTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"PerformAutoML\": \"<boolean>\",\n  \"PerformHPO\": \"<boolean>\",\n  \"Tags\": [\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    },\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/predictors",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "predictors"
+              ]
+            },
+            "description": "Creates an Amazon Forecast predictor (ML model) trained on a dataset group."
+          },
+          "response": [
+            {
+              "id": "804c61b5-749f-4e68-8e9f-24716e65f5d1",
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"PredictorName\": \"<string>\",\n  \"ForecastHorizon\": \"<integer>\",\n  \"InputDataConfig\": {},\n  \"FeaturizationConfig\": {},\n  \"AlgorithmArn\": \"<string>\",\n  \"ForecastTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"PerformAutoML\": \"<boolean>\",\n  \"PerformHPO\": \"<boolean>\",\n  \"Tags\": [\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    },\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/predictors",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "predictors"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"PredictorArn\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:03:58.000Z",
+              "updatedAt": "2026-06-05T15:03:58.000Z",
+              "uid": "35240-804c61b5-749f-4e68-8e9f-24716e65f5d1"
+            },
+            {
+              "id": "8a4333f5-82ec-4e41-a212-7f6db896df35",
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"PredictorName\": \"<string>\",\n  \"ForecastHorizon\": \"<integer>\",\n  \"InputDataConfig\": {},\n  \"FeaturizationConfig\": {},\n  \"AlgorithmArn\": \"<string>\",\n  \"ForecastTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"PerformAutoML\": \"<boolean>\",\n  \"PerformHPO\": \"<boolean>\",\n  \"Tags\": [\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    },\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/predictors",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "predictors"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Message\": \"<string>\",\n  \"Code\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:03:58.000Z",
+              "updatedAt": "2026-06-05T15:03:58.000Z",
+              "uid": "35240-8a4333f5-82ec-4e41-a212-7f6db896df35"
+            },
+            {
+              "id": "02a0ba00-f7be-4c83-8584-fe3eaddc7f10",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"PredictorName\": \"<string>\",\n  \"ForecastHorizon\": \"<integer>\",\n  \"InputDataConfig\": {},\n  \"FeaturizationConfig\": {},\n  \"AlgorithmArn\": \"<string>\",\n  \"ForecastTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"PerformAutoML\": \"<boolean>\",\n  \"PerformHPO\": \"<boolean>\",\n  \"Tags\": [\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    },\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/predictors",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "predictors"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Message\": \"<string>\",\n  \"Code\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:03:58.000Z",
+              "updatedAt": "2026-06-05T15:03:58.000Z",
+              "uid": "35240-02a0ba00-f7be-4c83-8584-fe3eaddc7f10"
+            }
+          ],
+          "createdAt": "2026-06-05T15:03:58.000Z",
+          "updatedAt": "2026-06-05T15:03:58.000Z",
+          "uid": "35240-f09251d9-590c-4248-8b92-ef82d1a11d9a"
+        },
+        {
+          "name": "List Predictors",
+          "id": "8e5b0998-0d31-47f1-acbf-fd1026f97ed5",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/predictors?maxResults=<integer>&nextToken=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "predictors"
+              ],
+              "query": [
+                {
+                  "description": "Maximum results.",
+                  "key": "maxResults",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Pagination token.",
+                  "key": "nextToken",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Returns a list of predictors."
+          },
+          "response": [
+            {
+              "id": "38bf5ca8-8a50-42ae-a736-ea298f48ffe8",
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/predictors?maxResults=<integer>&nextToken=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "predictors"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum results.",
+                      "key": "maxResults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Pagination token.",
+                      "key": "nextToken",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Predictors\": [\n    {\n      \"PredictorArn\": \"<string>\",\n      \"PredictorName\": \"<string>\",\n      \"Status\": \"<string>\",\n      \"CreationTime\": \"<dateTime>\",\n      \"LastModificationTime\": \"<dateTime>\"\n    },\n    {\n      \"PredictorArn\": \"<string>\",\n      \"PredictorName\": \"<string>\",\n      \"Status\": \"<string>\",\n      \"CreationTime\": \"<dateTime>\",\n      \"LastModificationTime\": \"<dateTime>\"\n    }\n  ],\n  \"NextToken\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:03:58.000Z",
+              "updatedAt": "2026-06-05T15:03:58.000Z",
+              "uid": "35240-38bf5ca8-8a50-42ae-a736-ea298f48ffe8"
+            },
+            {
+              "id": "b733917e-dc97-488a-ae0e-f69aa7f602ed",
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/predictors?maxResults=<integer>&nextToken=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "predictors"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum results.",
+                      "key": "maxResults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Pagination token.",
+                      "key": "nextToken",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Message\": \"<string>\",\n  \"Code\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:03:58.000Z",
+              "updatedAt": "2026-06-05T15:03:58.000Z",
+              "uid": "35240-b733917e-dc97-488a-ae0e-f69aa7f602ed"
+            },
+            {
+              "id": "ca56b93d-9369-441d-9a84-ae5faeb004cf",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/predictors?maxResults=<integer>&nextToken=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "predictors"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum results.",
+                      "key": "maxResults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Pagination token.",
+                      "key": "nextToken",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Message\": \"<string>\",\n  \"Code\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:03:58.000Z",
+              "updatedAt": "2026-06-05T15:03:58.000Z",
+              "uid": "35240-ca56b93d-9369-441d-9a84-ae5faeb004cf"
+            }
+          ],
+          "createdAt": "2026-06-05T15:03:58.000Z",
+          "updatedAt": "2026-06-05T15:03:58.000Z",
+          "uid": "35240-8e5b0998-0d31-47f1-acbf-fd1026f97ed5"
+        }
+      ],
+      "id": "0f431cf8-b1b1-4899-ac8b-380a3f79950f",
+      "createdAt": "2026-06-05T15:03:58.000Z",
+      "updatedAt": "2026-06-05T15:03:58.000Z",
+      "uid": "35240-0f431cf8-b1b1-4899-ac8b-380a3f79950f"
+    },
+    {
+      "name": "forecasts",
+      "item": [
+        {
+          "name": "Create Forecast",
+          "id": "98531b1e-0926-44e2-97c9-fae02334f538",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ForecastName\": \"<string>\",\n  \"PredictorArn\": \"<string>\",\n  \"ForecastTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"Tags\": [\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    },\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/forecasts",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "forecasts"
+              ]
+            },
+            "description": "Creates a forecast for each item in the TARGET_TIME_SERIES dataset."
+          },
+          "response": [
+            {
+              "id": "98894f2d-8caf-4518-adff-a9c0693cd922",
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ForecastName\": \"<string>\",\n  \"PredictorArn\": \"<string>\",\n  \"ForecastTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"Tags\": [\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    },\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/forecasts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "forecasts"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"ForecastArn\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:03:58.000Z",
+              "updatedAt": "2026-06-05T15:03:58.000Z",
+              "uid": "35240-98894f2d-8caf-4518-adff-a9c0693cd922"
+            },
+            {
+              "id": "66a2d8a8-f9ad-4eca-8984-f77b42995ea7",
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ForecastName\": \"<string>\",\n  \"PredictorArn\": \"<string>\",\n  \"ForecastTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"Tags\": [\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    },\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/forecasts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "forecasts"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Message\": \"<string>\",\n  \"Code\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:03:58.000Z",
+              "updatedAt": "2026-06-05T15:03:58.000Z",
+              "uid": "35240-66a2d8a8-f9ad-4eca-8984-f77b42995ea7"
+            },
+            {
+              "id": "03053ea0-d9ba-4c58-b9bb-bb73af5c0520",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ForecastName\": \"<string>\",\n  \"PredictorArn\": \"<string>\",\n  \"ForecastTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"Tags\": [\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    },\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/forecasts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "forecasts"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Message\": \"<string>\",\n  \"Code\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:03:58.000Z",
+              "updatedAt": "2026-06-05T15:03:58.000Z",
+              "uid": "35240-03053ea0-d9ba-4c58-b9bb-bb73af5c0520"
+            }
+          ],
+          "createdAt": "2026-06-05T15:03:58.000Z",
+          "updatedAt": "2026-06-05T15:03:58.000Z",
+          "uid": "35240-98531b1e-0926-44e2-97c9-fae02334f538"
+        },
+        {
+          "name": "List Forecasts",
+          "id": "b92c8f6a-290e-4252-b03e-5219fa471ecd",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/forecasts?maxResults=<integer>&nextToken=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "forecasts"
+              ],
+              "query": [
+                {
+                  "description": "Maximum results.",
+                  "key": "maxResults",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Pagination token.",
+                  "key": "nextToken",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Returns a list of forecasts."
+          },
+          "response": [
+            {
+              "id": "c95df38d-6273-430b-aef6-39395ec49166",
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/forecasts?maxResults=<integer>&nextToken=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "forecasts"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum results.",
+                      "key": "maxResults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Pagination token.",
+                      "key": "nextToken",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Forecasts\": [\n    {\n      \"ForecastArn\": \"<string>\",\n      \"ForecastName\": \"<string>\",\n      \"PredictorArn\": \"<string>\",\n      \"DatasetGroupArn\": \"<string>\",\n      \"Status\": \"<string>\",\n      \"CreationTime\": \"<dateTime>\",\n      \"LastModificationTime\": \"<dateTime>\"\n    },\n    {\n      \"ForecastArn\": \"<string>\",\n      \"ForecastName\": \"<string>\",\n      \"PredictorArn\": \"<string>\",\n      \"DatasetGroupArn\": \"<string>\",\n      \"Status\": \"<string>\",\n      \"CreationTime\": \"<dateTime>\",\n      \"LastModificationTime\": \"<dateTime>\"\n    }\n  ],\n  \"NextToken\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:03:58.000Z",
+              "updatedAt": "2026-06-05T15:03:58.000Z",
+              "uid": "35240-c95df38d-6273-430b-aef6-39395ec49166"
+            },
+            {
+              "id": "ec76d222-984e-45a6-8ba5-3212df3dfdef",
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/forecasts?maxResults=<integer>&nextToken=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "forecasts"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum results.",
+                      "key": "maxResults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Pagination token.",
+                      "key": "nextToken",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Message\": \"<string>\",\n  \"Code\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:03:58.000Z",
+              "updatedAt": "2026-06-05T15:03:58.000Z",
+              "uid": "35240-ec76d222-984e-45a6-8ba5-3212df3dfdef"
+            },
+            {
+              "id": "d6eee554-324c-42a9-a8db-1544cd426973",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/forecasts?maxResults=<integer>&nextToken=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "forecasts"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum results.",
+                      "key": "maxResults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Pagination token.",
+                      "key": "nextToken",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Message\": \"<string>\",\n  \"Code\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:03:58.000Z",
+              "updatedAt": "2026-06-05T15:03:58.000Z",
+              "uid": "35240-d6eee554-324c-42a9-a8db-1544cd426973"
+            }
+          ],
+          "createdAt": "2026-06-05T15:03:58.000Z",
+          "updatedAt": "2026-06-05T15:03:58.000Z",
+          "uid": "35240-b92c8f6a-290e-4252-b03e-5219fa471ecd"
+        }
+      ],
+      "id": "045ac915-5f28-475f-8275-2582614c5a4e",
+      "createdAt": "2026-06-05T15:03:58.000Z",
+      "updatedAt": "2026-06-05T15:03:58.000Z",
+      "uid": "35240-045ac915-5f28-475f-8275-2582614c5a4e"
+    },
+    {
+      "name": "forecast-export-jobs",
+      "item": [
+        {
+          "name": "Create Forecast Export Job",
+          "id": "6d58aedc-6103-40e1-948c-2b5707c56a87",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ForecastExportJobName\": \"<string>\",\n  \"ForecastArn\": \"<string>\",\n  \"Destination\": {},\n  \"Tags\": [\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    },\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/forecast-export-jobs",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "forecast-export-jobs"
+              ]
+            },
+            "description": "Exports a forecast created by CreateForecast to your Amazon S3 bucket."
+          },
+          "response": [
+            {
+              "id": "3da0a05b-11d4-40f7-a2e8-1a8ab0f93040",
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ForecastExportJobName\": \"<string>\",\n  \"ForecastArn\": \"<string>\",\n  \"Destination\": {},\n  \"Tags\": [\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    },\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/forecast-export-jobs",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "forecast-export-jobs"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"ForecastExportJobArn\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:03:58.000Z",
+              "updatedAt": "2026-06-05T15:03:58.000Z",
+              "uid": "35240-3da0a05b-11d4-40f7-a2e8-1a8ab0f93040"
+            },
+            {
+              "id": "95ca9d49-6655-45c0-8891-9a595baa487d",
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ForecastExportJobName\": \"<string>\",\n  \"ForecastArn\": \"<string>\",\n  \"Destination\": {},\n  \"Tags\": [\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    },\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/forecast-export-jobs",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "forecast-export-jobs"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Message\": \"<string>\",\n  \"Code\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:03:58.000Z",
+              "updatedAt": "2026-06-05T15:03:58.000Z",
+              "uid": "35240-95ca9d49-6655-45c0-8891-9a595baa487d"
+            },
+            {
+              "id": "ffd51e62-b0eb-4b4d-bd0f-867525c8eb7b",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ForecastExportJobName\": \"<string>\",\n  \"ForecastArn\": \"<string>\",\n  \"Destination\": {},\n  \"Tags\": [\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    },\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/forecast-export-jobs",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "forecast-export-jobs"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Message\": \"<string>\",\n  \"Code\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:03:58.000Z",
+              "updatedAt": "2026-06-05T15:03:58.000Z",
+              "uid": "35240-ffd51e62-b0eb-4b4d-bd0f-867525c8eb7b"
+            }
+          ],
+          "createdAt": "2026-06-05T15:03:58.000Z",
+          "updatedAt": "2026-06-05T15:03:58.000Z",
+          "uid": "35240-6d58aedc-6103-40e1-948c-2b5707c56a87"
+        }
+      ],
+      "id": "227fdaca-8322-4365-8f01-6c042ba1030f",
+      "createdAt": "2026-06-05T15:03:58.000Z",
+      "updatedAt": "2026-06-05T15:03:58.000Z",
+      "uid": "35240-227fdaca-8322-4365-8f01-6c042ba1030f"
+    },
+    {
+      "name": "tags",
+      "item": [
+        {
+          "name": "{resourceArn}",
+          "item": [
+            {
+              "name": "List Tags For Resource",
+              "id": "69910797-2e9a-4e2a-96b2-1d7d856a99ad",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/tags/:resourceArn",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tags",
+                    ":resourceArn"
+                  ],
+                  "variable": [
+                    {
+                      "id": "350ef705-1995-4210-9d22-27cbe4ce1a4e",
+                      "key": "resourceArn",
+                      "value": "<string>",
+                      "description": "(Required) ARN of the resource."
+                    }
+                  ]
+                },
+                "description": "Lists the tags for an Amazon Forecast resource."
+              },
+              "response": [
+                {
+                  "id": "f810b449-10be-4c39-8cde-e48d6721f3b9",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tags/:resourceArn",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tags",
+                        ":resourceArn"
+                      ],
+                      "variable": [
+                        {
+                          "key": "resourceArn"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"Tags\": [\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    },\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:03:58.000Z",
+                  "updatedAt": "2026-06-05T15:03:58.000Z",
+                  "uid": "35240-f810b449-10be-4c39-8cde-e48d6721f3b9"
+                },
+                {
+                  "id": "e618feea-bf71-4c7e-8a39-0774625ebc8c",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tags/:resourceArn",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tags",
+                        ":resourceArn"
+                      ],
+                      "variable": [
+                        {
+                          "key": "resourceArn"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"Message\": \"<string>\",\n  \"Code\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:03:58.000Z",
+                  "updatedAt": "2026-06-05T15:03:58.000Z",
+                  "uid": "35240-e618feea-bf71-4c7e-8a39-0774625ebc8c"
+                },
+                {
+                  "id": "51405c06-2a13-4a15-9338-5dfc0a9ef17e",
+                  "name": "Internal Server Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tags/:resourceArn",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tags",
+                        ":resourceArn"
+                      ],
+                      "variable": [
+                        {
+                          "key": "resourceArn"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"Message\": \"<string>\",\n  \"Code\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:03:58.000Z",
+                  "updatedAt": "2026-06-05T15:03:58.000Z",
+                  "uid": "35240-51405c06-2a13-4a15-9338-5dfc0a9ef17e"
+                }
+              ],
+              "createdAt": "2026-06-05T15:03:58.000Z",
+              "updatedAt": "2026-06-05T15:03:58.000Z",
+              "uid": "35240-69910797-2e9a-4e2a-96b2-1d7d856a99ad"
+            },
+            {
+              "name": "Tag Resource",
+              "id": "2f90f187-3753-44f8-b5bb-18f9134e48cd",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Tags\": [\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    },\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/tags/:resourceArn",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tags",
+                    ":resourceArn"
+                  ],
+                  "variable": [
+                    {
+                      "id": "1ca6232f-b80e-4205-a0c8-2ae33eccc286",
+                      "key": "resourceArn",
+                      "value": "<string>",
+                      "description": "(Required) ARN of the resource."
+                    }
+                  ]
+                },
+                "description": "Associates the specified tags to a resource."
+              },
+              "response": [
+                {
+                  "id": "678481e2-38a8-4c91-a911-d4cf3bd2540b",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"Tags\": [\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    },\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/tags/:resourceArn",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tags",
+                        ":resourceArn"
+                      ],
+                      "variable": [
+                        {
+                          "key": "resourceArn"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:03:58.000Z",
+                  "updatedAt": "2026-06-05T15:03:58.000Z",
+                  "uid": "35240-678481e2-38a8-4c91-a911-d4cf3bd2540b"
+                },
+                {
+                  "id": "f8e7b56f-f09c-4c9d-8065-3154d0e7ff69",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"Tags\": [\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    },\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/tags/:resourceArn",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tags",
+                        ":resourceArn"
+                      ],
+                      "variable": [
+                        {
+                          "key": "resourceArn"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"Message\": \"<string>\",\n  \"Code\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:03:58.000Z",
+                  "updatedAt": "2026-06-05T15:03:58.000Z",
+                  "uid": "35240-f8e7b56f-f09c-4c9d-8065-3154d0e7ff69"
+                },
+                {
+                  "id": "32f3e607-ef41-4f6b-9a2d-4caa662393d6",
+                  "name": "Internal Server Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"Tags\": [\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    },\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/tags/:resourceArn",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tags",
+                        ":resourceArn"
+                      ],
+                      "variable": [
+                        {
+                          "key": "resourceArn"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"Message\": \"<string>\",\n  \"Code\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:03:58.000Z",
+                  "updatedAt": "2026-06-05T15:03:58.000Z",
+                  "uid": "35240-32f3e607-ef41-4f6b-9a2d-4caa662393d6"
+                }
+              ],
+              "createdAt": "2026-06-05T15:03:58.000Z",
+              "updatedAt": "2026-06-05T15:03:58.000Z",
+              "uid": "35240-2f90f187-3753-44f8-b5bb-18f9134e48cd"
+            }
+          ],
+          "id": "a91bff7e-eff4-4624-8616-12d6167623b0",
+          "createdAt": "2026-06-05T15:03:58.000Z",
+          "updatedAt": "2026-06-05T15:03:58.000Z",
+          "uid": "35240-a91bff7e-eff4-4624-8616-12d6167623b0"
+        }
+      ],
+      "id": "5bd237c0-9055-4c66-902e-468ccfff79d4",
+      "createdAt": "2026-06-05T15:03:58.000Z",
+      "updatedAt": "2026-06-05T15:03:58.000Z",
+      "uid": "35240-5bd237c0-9055-4c66-902e-468ccfff79d4"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "region",
+      "value": "us-east-1"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://forecast.{{region}}.amazonaws.com"
+    }
+  ]
+}
