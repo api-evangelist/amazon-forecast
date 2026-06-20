@@ -5,7 +5,7 @@ description: >-
   analyzes your historical time-series data and automatically selects the right machine learning algorithms to generate
   accurate forecasts with no machine learning expertise required.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - AWS
   - Forecasting
