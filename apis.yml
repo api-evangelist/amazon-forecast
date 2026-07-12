@@ -72,6 +72,14 @@ apis:
       - type: APIReference
         url: https://docs.aws.amazon.com/forecast/latest/dg/API_Operations.html
 common:
+  - type: TrustCenter
+    url: security/amazon-forecast-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/amazon-forecast-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/amazon-forecast-domain-security.yml
+  - type: Authentication
+    url: authentication/amazon-forecast-authentication.yml
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/amazon-forecast/overview
   - type: Arazzo
