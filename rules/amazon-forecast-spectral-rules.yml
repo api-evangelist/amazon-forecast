@@ -1,186 +1,206 @@
-# Amazon Forecast Spectral Rules
-extends: spectral:oas
+# amazon-forecast — Spectral ruleset (strengthened)
+# Plain Spectral. Existing hand-authored rules preserved; measured rules added
+# from this provider's own OpenAPI conventions by strengthen_ruleset.py,
+# then self-validated against the spec.
+#
+# Provenance:
+#   - servers-https-only: 100% of servers already https (error)
+#   - servers-expected-domain: 1/1 servers on amazonaws.com
+#   - path-params-casing: camel @ 100% (n=3)
+#   - query-params-casing: camel @ 100% (n=8)
+#   - operationid-casing: camel @ 100% (n=12)
+#   - schema-names-casing: pascal @ 100% (n=14)
+#   - schema-properties-casing: pascal @ 98% (n=97)
+#   - security: global (root) — NOT emitting operation-security-required
+#   - error-schema-defined: ErrorResponse
+#   - operation-documents-400: 100% adherence
+#   - operation-documents-500: 100% adherence
+#   - pagination params observed: ['maxResults', 'nextToken']
+#   - merge: kept 25 existing, added 10 measured, upgraded 0
+#   - added: servers-expected-domain, path-params-casing, query-params-casing, schema-names-casing, schema-properties-casing, security-schemes-defined, error-schema-defined, operation-documents-400, operation-documents-500, no-empty-descriptions
+extends:
+  - spectral:oas
 rules:
   forecast-info-contact:
     description: API must include contact information
     severity: warn
-    given: "$.info"
+    given: $.info
     then:
       field: contact
       function: truthy
   forecast-info-description:
     description: API must have a description
     severity: error
-    given: "$.info"
+    given: $.info
     then:
       field: description
       function: truthy
   forecast-server-https:
     description: Server URLs must use HTTPS
     severity: error
-    given: "$.servers[*].url"
+    given: $.servers[*].url
     then:
       function: pattern
       functionOptions:
-        match: "^https://"
+        match: ^https://
   forecast-operation-summary:
     description: Operations must have a summary
     severity: error
-    given: "$.paths[*][get,post,put,patch,delete]"
+    given: $.paths[*][get,post,put,patch,delete]
     then:
       field: summary
       function: truthy
   forecast-operation-description:
     description: Operations should have a description
     severity: warn
-    given: "$.paths[*][get,post,put,patch,delete]"
+    given: $.paths[*][get,post,put,patch,delete]
     then:
       field: description
       function: truthy
   forecast-operation-tags:
     description: Operations must have at least one tag
     severity: error
-    given: "$.paths[*][get,post,put,patch,delete]"
+    given: $.paths[*][get,post,put,patch,delete]
     then:
       field: tags
       function: truthy
   forecast-operation-id:
     description: Operations must have operationId
     severity: error
-    given: "$.paths[*][get,post,put,patch,delete]"
+    given: $.paths[*][get,post,put,patch,delete]
     then:
       field: operationId
       function: truthy
   forecast-operation-id-camel-case:
     description: operationId should use camelCase
     severity: warn
-    given: "$.paths[*][get,post,put,patch,delete].operationId"
+    given: $.paths[*][get,post,put,patch,delete].operationId
     then:
       function: pattern
       functionOptions:
-        match: "^[a-z][a-zA-Z0-9]*$"
+        match: ^[a-z][a-zA-Z0-9]*$
   forecast-response-200:
     description: POST operations should define 200 response
     severity: warn
-    given: "$.paths[*][post]"
+    given: $.paths[*][post]
     then:
       field: responses.200
       function: truthy
   forecast-response-400:
     description: Operations should define 400 response
     severity: warn
-    given: "$.paths[*][get,post,put,patch,delete]"
+    given: $.paths[*][get,post,put,patch,delete]
     then:
       field: responses.400
       function: truthy
   forecast-response-500:
     description: Operations should define 500 response
     severity: warn
-    given: "$.paths[*][get,post,put,patch,delete]"
+    given: $.paths[*][get,post,put,patch,delete]
     then:
       field: responses.500
       function: truthy
   forecast-parameter-description:
     description: Parameters must have descriptions
     severity: error
-    given: "$.paths[*][get,post,put,patch,delete].parameters[*]"
+    given: $.paths[*][get,post,put,patch,delete].parameters[*]
     then:
       field: description
       function: truthy
   forecast-schema-description:
     description: Schema components should have descriptions
     severity: warn
-    given: "$.components.schemas[*]"
+    given: $.components.schemas[*]
     then:
       field: description
       function: truthy
   forecast-tags-title-case:
     description: Operation tags should use Title Case
     severity: warn
-    given: "$.paths[*][*].tags[*]"
+    given: $.paths[*][*].tags[*]
     then:
       function: pattern
       functionOptions:
-        match: "^[A-Z][a-zA-Z0-9 ]*$"
+        match: ^[A-Z][a-zA-Z0-9 ]*$
   forecast-list-operation-prefix:
     description: Collection GET operationIds should start with 'list'
     severity: warn
-    given: "$.paths[*~'[^}]$'].get.operationId"
+    given: $.paths[*~'[^}]$'].get.operationId
     then:
       function: pattern
       functionOptions:
-        match: "^list"
+        match: ^list
   forecast-create-post-prefix:
     description: POST operationIds should start with 'create'
     severity: warn
-    given: "$.paths[*].post.operationId"
+    given: $.paths[*].post.operationId
     then:
       function: pattern
       functionOptions:
-        match: "^(create|tag)"
+        match: ^(create|tag)
   forecast-dataset-domain-documented:
     description: Dataset schema should define Domain enum values
     severity: warn
-    given: "$.components.schemas.Dataset.properties.Domain"
+    given: $.components.schemas.Dataset.properties.Domain
     then:
       field: enum
       function: truthy
   forecast-predictor-horizon-documented:
     description: Predictor schema should include ForecastHorizon
     severity: warn
-    given: "$.components.schemas.Predictor.properties"
+    given: $.components.schemas.Predictor.properties
     then:
       field: ForecastHorizon
       function: truthy
   forecast-schema-properties-defined:
     description: Object schemas should define properties
     severity: warn
-    given: "$.components.schemas[?(@.type=='object')]"
+    given: $.components.schemas[?(@.type=='object')]
     then:
       field: properties
       function: truthy
   forecast-request-body-content:
     description: POST request bodies must define content
     severity: error
-    given: "$.paths[*].post.requestBody"
+    given: $.paths[*].post.requestBody
     then:
       field: content
       function: truthy
   forecast-arn-fields-consistent:
     description: ARN fields should follow consistent naming (ResourceArn pattern)
-    message: "ARN field '{{value}}' should end with 'Arn'"
+    message: ARN field '{{value}}' should end with 'Arn'
     severity: info
-    given: "$.components.schemas[*].properties[*~'Arn$']"
+    given: $.components.schemas[*].properties[*~'Arn$']
     then:
       field: type
       function: truthy
   forecast-forecast-types-array:
     description: ForecastTypes should be an array of quantile strings
     severity: info
-    given: "$.components.schemas.Forecast.properties.ForecastTypes"
+    given: $.components.schemas.Forecast.properties.ForecastTypes
     then:
       field: type
       function: pattern
       functionOptions:
-        match: "^array$"
+        match: ^array$
   forecast-status-field-documented:
     description: Resources should document Status field
     severity: info
-    given: "$.components.schemas[*].properties.Status"
+    given: $.components.schemas[*].properties.Status
     then:
       field: type
       function: truthy
   forecast-tag-schema-documented:
     description: Tag schema should be defined
     severity: warn
-    given: "$.components.schemas"
+    given: $.components.schemas
     then:
       field: Tag
       function: truthy
   forecast-export-job-destination:
     description: Export job request should require Destination
     severity: warn
-    given: "$.components.schemas.CreateForecastExportJobRequest.required"
+    given: $.components.schemas.CreateForecastExportJobRequest.required
     then:
       function: schema
       functionOptions:
@@ -188,3 +208,80 @@ rules:
           type: array
           contains:
             const: Destination
+  servers-expected-domain:
+    description: Server URLs should be on the amazonaws.com domain.
+    severity: warn
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: amazonaws\.com
+  path-params-casing:
+    description: Path parameters should be camelCase (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*].parameters[?(@.in=='path')].name
+    then:
+      function: casing
+      functionOptions:
+        type: camel
+  query-params-casing:
+    description: Query parameters should be camelCase (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].parameters[?(@.in=='query')]
+    then:
+      field: name
+      function: casing
+      functionOptions:
+        type: camel
+  schema-names-casing:
+    description: Component schema names should be PascalCase (the dominant convention in this API).
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: pascal
+  schema-properties-casing:
+    description: Schema properties should be PascalCase (the dominant convention in this API).
+    severity: warn
+    given: $.components.schemas[*].properties
+    then:
+      field: '@key'
+      function: pattern
+      functionOptions:
+        match: ^[A-Z][A-Za-z0-9]*$
+  security-schemes-defined:
+    description: Security schemes should be defined in components.
+    severity: warn
+    given: $.components
+    then:
+      field: securitySchemes
+      function: truthy
+  error-schema-defined:
+    description: A shared error schema (ErrorResponse) should be defined for error payloads.
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: ErrorResponse
+      function: truthy
+  operation-documents-400:
+    description: Operations should document a 400 response (documented on 100% of this API's operations).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].responses
+    then:
+      field: '400'
+      function: truthy
+  operation-documents-500:
+    description: Operations should document a 500 response (documented on 100% of this API's operations).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].responses
+    then:
+      field: '500'
+      function: truthy
+  no-empty-descriptions:
+    description: Descriptions must not be empty strings.
+    severity: warn
+    given: $..description
+    then:
+      function: truthy
