@@ -1,0 +1,141 @@
+openapi: 3.1.0
+info:
+  title: Amazon Forecast Dataset Groups Tags API
+  description: Amazon Forecast is a fully managed service that uses machine learning to deliver highly accurate time-series forecasts.
+  version: '2018-06-26'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://forecast.{region}.amazonaws.com
+  variables:
+    region:
+      default: us-east-1
+security:
+- awsSigV4: []
+tags:
+- name: Tags
+  description: Resource metadata labels
+paths:
+  /tags/{resourceArn}:
+    get:
+      operationId: listTagsForResource
+      summary: List Tags For Resource
+      description: Lists the tags for an Amazon Forecast resource.
+      tags:
+      - Tags
+      parameters:
+      - name: resourceArn
+        in: path
+        required: true
+        schema:
+          type: string
+        description: ARN of the resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Tags:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Tag'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    Tags:
+                    - Key: Environment
+                      Value: Production
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: tagResource
+      summary: Tag Resource
+      description: Associates the specified tags to a resource.
+      tags:
+      - Tags
+      parameters:
+      - name: resourceArn
+        in: path
+        required: true
+        schema:
+          type: string
+        description: ARN of the resource.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Tags:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+              required:
+              - Tags
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Forecast API.
+      properties:
+        Message:
+          type: string
+        Code:
+          type: string
+    Tag:
+      type: object
+      description: A metadata label applied to a Forecast resource.
+      properties:
+        Key:
+          type: string
+        Value:
+          type: string
+      required:
+      - Key
+      - Value
+  securitySchemes:
+    awsSigV4:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: AWS Signature Version 4

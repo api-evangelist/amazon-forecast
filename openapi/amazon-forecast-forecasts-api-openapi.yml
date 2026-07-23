@@ -1,0 +1,185 @@
+openapi: 3.1.0
+info:
+  title: Amazon Forecast Dataset Groups Forecasts API
+  description: Amazon Forecast is a fully managed service that uses machine learning to deliver highly accurate time-series forecasts.
+  version: '2018-06-26'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://forecast.{region}.amazonaws.com
+  variables:
+    region:
+      default: us-east-1
+security:
+- awsSigV4: []
+tags:
+- name: Forecasts
+  description: Generated forecast outputs
+paths:
+  /forecasts:
+    post:
+      operationId: createForecast
+      summary: Create Forecast
+      description: Creates a forecast for each item in the TARGET_TIME_SERIES dataset.
+      tags:
+      - Forecasts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateForecastRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ForecastArn:
+                    type: string
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    ForecastArn: arn:aws:forecast:us-east-1:123456789012:forecast/MyForecast
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      operationId: listForecasts
+      summary: List Forecasts
+      description: Returns a list of forecasts.
+      tags:
+      - Forecasts
+      parameters:
+      - name: maxResults
+        in: query
+        schema:
+          type: integer
+        description: Maximum results.
+      - name: nextToken
+        in: query
+        schema:
+          type: string
+        description: Pagination token.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Forecasts:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ForecastSummary'
+                  NextToken:
+                    type: string
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    Forecasts:
+                    - ForecastArn: arn:aws:forecast:us-east-1:123456789012:forecast/MyForecast
+                      ForecastName: MyForecast
+                      PredictorArn: arn:aws:forecast:us-east-1:123456789012:predictor/MyPredictor
+                      Status: ACTIVE
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ForecastSummary:
+      type: object
+      description: Summary of an Amazon Forecast forecast.
+      properties:
+        ForecastArn:
+          type: string
+        ForecastName:
+          type: string
+        PredictorArn:
+          type: string
+        DatasetGroupArn:
+          type: string
+        Status:
+          type: string
+        CreationTime:
+          type: string
+          format: date-time
+        LastModificationTime:
+          type: string
+          format: date-time
+    Tag:
+      type: object
+      description: A metadata label applied to a Forecast resource.
+      properties:
+        Key:
+          type: string
+        Value:
+          type: string
+      required:
+      - Key
+      - Value
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Forecast API.
+      properties:
+        Message:
+          type: string
+        Code:
+          type: string
+    CreateForecastRequest:
+      type: object
+      required:
+      - ForecastName
+      - PredictorArn
+      properties:
+        ForecastName:
+          type: string
+        PredictorArn:
+          type: string
+        ForecastTypes:
+          type: array
+          items:
+            type: string
+        Tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+  securitySchemes:
+    awsSigV4:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: AWS Signature Version 4

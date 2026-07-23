@@ -1,0 +1,109 @@
+openapi: 3.1.0
+info:
+  title: Amazon Forecast Dataset Groups Export Jobs API
+  description: Amazon Forecast is a fully managed service that uses machine learning to deliver highly accurate time-series forecasts.
+  version: '2018-06-26'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://forecast.{region}.amazonaws.com
+  variables:
+    region:
+      default: us-east-1
+security:
+- awsSigV4: []
+tags:
+- name: Export Jobs
+  description: Forecast data export to S3
+paths:
+  /forecast-export-jobs:
+    post:
+      operationId: createForecastExportJob
+      summary: Create Forecast Export Job
+      description: Exports a forecast created by CreateForecast to your Amazon S3 bucket.
+      tags:
+      - Export Jobs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateForecastExportJobRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ForecastExportJobArn:
+                    type: string
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    ForecastExportJobArn: arn:aws:forecast:us-east-1:123456789012:forecast-export-job/MyExportJob
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Tag:
+      type: object
+      description: A metadata label applied to a Forecast resource.
+      properties:
+        Key:
+          type: string
+        Value:
+          type: string
+      required:
+      - Key
+      - Value
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Forecast API.
+      properties:
+        Message:
+          type: string
+        Code:
+          type: string
+    CreateForecastExportJobRequest:
+      type: object
+      required:
+      - ForecastExportJobName
+      - ForecastArn
+      - Destination
+      properties:
+        ForecastExportJobName:
+          type: string
+        ForecastArn:
+          type: string
+        Destination:
+          type: object
+        Tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+  securitySchemes:
+    awsSigV4:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: AWS Signature Version 4

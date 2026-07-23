@@ -1,0 +1,289 @@
+openapi: 3.1.0
+info:
+  title: Amazon Forecast Dataset Groups Datasets API
+  description: Amazon Forecast is a fully managed service that uses machine learning to deliver highly accurate time-series forecasts.
+  version: '2018-06-26'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://forecast.{region}.amazonaws.com
+  variables:
+    region:
+      default: us-east-1
+security:
+- awsSigV4: []
+tags:
+- name: Datasets
+  description: Dataset management for training data
+paths:
+  /datasets:
+    post:
+      operationId: createDataset
+      summary: Create Dataset
+      description: Creates an Amazon Forecast dataset.
+      tags:
+      - Datasets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDatasetRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  DatasetArn:
+                    type: string
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    DatasetArn: arn:aws:forecast:us-east-1:123456789012:dataset/MyDataset
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      operationId: listDatasets
+      summary: List Datasets
+      description: Returns a list of datasets created using CreateDataset.
+      tags:
+      - Datasets
+      parameters:
+      - name: maxResults
+        in: query
+        schema:
+          type: integer
+        description: Maximum results to return.
+      - name: nextToken
+        in: query
+        schema:
+          type: string
+        description: Pagination token.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Datasets:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DatasetSummary'
+                  NextToken:
+                    type: string
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    Datasets:
+                    - DatasetArn: arn:aws:forecast:us-east-1:123456789012:dataset/MyDataset
+                      DatasetName: MyDataset
+                      Domain: RETAIL
+                      DatasetType: TARGET_TIME_SERIES
+                      DataFrequency: D
+                      Status: ACTIVE
+                    NextToken: null
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /describe/dataset/{datasetArn}:
+    get:
+      operationId: describeDataset
+      summary: Describe Dataset
+      description: Describes an Amazon Forecast dataset.
+      tags:
+      - Datasets
+      parameters:
+      - name: datasetArn
+        in: path
+        required: true
+        schema:
+          type: string
+        description: ARN of the dataset.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dataset'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    DatasetArn: arn:aws:forecast:us-east-1:123456789012:dataset/MyDataset
+                    DatasetName: MyDataset
+                    Domain: RETAIL
+                    DatasetType: TARGET_TIME_SERIES
+                    DataFrequency: D
+                    Status: ACTIVE
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    CreateDatasetRequest:
+      type: object
+      required:
+      - DatasetName
+      - Domain
+      - DatasetType
+      - Schema
+      properties:
+        DatasetName:
+          type: string
+        Domain:
+          type: string
+        DatasetType:
+          type: string
+        DataFrequency:
+          type: string
+        Schema:
+          type: object
+        Tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Forecast API.
+      properties:
+        Message:
+          type: string
+        Code:
+          type: string
+    Dataset:
+      type: object
+      description: An Amazon Forecast dataset that contains training data.
+      properties:
+        DatasetArn:
+          type: string
+        DatasetName:
+          type: string
+        Domain:
+          type: string
+          enum:
+          - RETAIL
+          - CUSTOM
+          - INVENTORY_PLANNING
+          - EC2_CAPACITY
+          - WORK_FORCE
+          - WEB_TRAFFIC
+          - METRICS
+        DatasetType:
+          type: string
+          enum:
+          - TARGET_TIME_SERIES
+          - RELATED_TIME_SERIES
+          - ITEM_METADATA
+        DataFrequency:
+          type: string
+        Schema:
+          type: object
+        EncryptionConfig:
+          type: object
+        Status:
+          type: string
+        DatasetArn_:
+          type: string
+        CreationTime:
+          type: string
+          format: date-time
+        LastModificationTime:
+          type: string
+          format: date-time
+      required:
+      - DatasetName
+      - Domain
+      - DatasetType
+      - Schema
+    DatasetSummary:
+      type: object
+      description: Summary of an Amazon Forecast dataset.
+      properties:
+        DatasetArn:
+          type: string
+        DatasetName:
+          type: string
+        DatasetType:
+          type: string
+        Domain:
+          type: string
+        Status:
+          type: string
+        CreationTime:
+          type: string
+          format: date-time
+        LastModificationTime:
+          type: string
+          format: date-time
+    Tag:
+      type: object
+      description: A metadata label applied to a Forecast resource.
+      properties:
+        Key:
+          type: string
+        Value:
+          type: string
+      required:
+      - Key
+      - Value
+  securitySchemes:
+    awsSigV4:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: AWS Signature Version 4
