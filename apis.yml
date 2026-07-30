@@ -5,7 +5,20 @@ description: >-
   analyzes your historical time-series data and automatically selects the right machine learning algorithms to generate
   accurate forecasts with no machine learning expertise required.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/amazon-forecast.png
 tags:
   - AWS
   - Forecasting
@@ -17,60 +30,306 @@ created: '2026-03-16'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: amazon-forecast:amazon-forecast-api
-    name: Amazon Forecast API
-    description: >-
-      The Amazon Forecast API provides programmatic access to create and manage datasets, predictors, forecasts, and
-      export jobs for time-series forecasting using machine learning models.
-    humanURL: https://aws.amazon.com/forecast/
-    baseURL: https://forecast.amazonaws.com
-    tags:
-      - Forecasting
-      - Machine Learning
-      - Time Series
-    properties:
-      - type: Documentation
-        url: https://docs.aws.amazon.com/forecast/latest/dg/what-is-forecast.html
-      - type: OpenAPI
-        url: openapi/amazon-forecast-openapi.yml
-      - type: JSONSchema
-        url: json-schema/amazon-forecast-dataset-schema.json
-      - type: JSONSchema
-        url: json-schema/amazon-forecast-predictor-schema.json
-      - type: JSONSchema
-        url: json-schema/amazon-forecast-forecast-schema.json
-      - type: JSONSchema
-        url: json-schema/amazon-forecast-dataset-group-schema.json
-      - type: JSONSchema
-        url: json-schema/amazon-forecast-tag-schema.json
-      - type: JSONStructure
-        url: json-structure/amazon-forecast-dataset-structure.json
-      - type: JSONStructure
-        url: json-structure/amazon-forecast-predictor-structure.json
-      - type: JSONStructure
-        url: json-structure/amazon-forecast-forecast-structure.json
-      - type: JSONStructure
-        url: json-structure/amazon-forecast-dataset-group-structure.json
-      - type: JSONStructure
-        url: json-structure/amazon-forecast-tag-structure.json
-      - type: Examples
-        url: examples/amazon-forecast-dataset-example.json
-      - type: Examples
-        url: examples/amazon-forecast-dataset-group-example.json
-      - type: Examples
-        url: examples/amazon-forecast-predictor-example.json
-      - type: Examples
-        url: examples/amazon-forecast-forecast-example.json
-      - type: Examples
-        url: examples/amazon-forecast-tag-example.json
-      - type: GettingStarted
-        url: https://aws.amazon.com/forecast/getting-started/
-      - type: Pricing
-        url: https://aws.amazon.com/forecast/pricing/
-      - type: FAQ
-        url: https://aws.amazon.com/forecast/faqs/
-      - type: APIReference
-        url: https://docs.aws.amazon.com/forecast/latest/dg/API_Operations.html
+- aid: amazon-forecast:amazon-forecast-dataset-groups-api
+  name: Amazon Forecast Dataset Groups API
+  description: Logical groupings of related datasets
+  humanURL: https://aws.amazon.com/forecast/
+  baseURL: https://forecast.amazonaws.com
+  tags:
+  - Dataset Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-forecast-dataset-groups-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/forecast/latest/dg/what-is-forecast.html
+  - type: JSONSchema
+    url: json-schema/amazon-forecast-dataset-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-forecast-predictor-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-forecast-forecast-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-forecast-dataset-group-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-forecast-tag-schema.json
+  - type: JSONStructure
+    url: json-structure/amazon-forecast-dataset-structure.json
+  - type: JSONStructure
+    url: json-structure/amazon-forecast-predictor-structure.json
+  - type: JSONStructure
+    url: json-structure/amazon-forecast-forecast-structure.json
+  - type: JSONStructure
+    url: json-structure/amazon-forecast-dataset-group-structure.json
+  - type: JSONStructure
+    url: json-structure/amazon-forecast-tag-structure.json
+  - type: Examples
+    url: examples/amazon-forecast-dataset-example.json
+  - type: Examples
+    url: examples/amazon-forecast-dataset-group-example.json
+  - type: Examples
+    url: examples/amazon-forecast-predictor-example.json
+  - type: Examples
+    url: examples/amazon-forecast-forecast-example.json
+  - type: Examples
+    url: examples/amazon-forecast-tag-example.json
+  - type: GettingStarted
+    url: https://aws.amazon.com/forecast/getting-started/
+  - type: Pricing
+    url: https://aws.amazon.com/forecast/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/forecast/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/forecast/latest/dg/API_Operations.html
+- aid: amazon-forecast:amazon-forecast-datasets-api
+  name: Amazon Forecast Datasets API
+  description: Dataset management for training data
+  humanURL: https://aws.amazon.com/forecast/
+  baseURL: https://forecast.amazonaws.com
+  tags:
+  - Datasets
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-forecast-datasets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/forecast/latest/dg/what-is-forecast.html
+  - type: JSONSchema
+    url: json-schema/amazon-forecast-dataset-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-forecast-predictor-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-forecast-forecast-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-forecast-dataset-group-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-forecast-tag-schema.json
+  - type: JSONStructure
+    url: json-structure/amazon-forecast-dataset-structure.json
+  - type: JSONStructure
+    url: json-structure/amazon-forecast-predictor-structure.json
+  - type: JSONStructure
+    url: json-structure/amazon-forecast-forecast-structure.json
+  - type: JSONStructure
+    url: json-structure/amazon-forecast-dataset-group-structure.json
+  - type: JSONStructure
+    url: json-structure/amazon-forecast-tag-structure.json
+  - type: Examples
+    url: examples/amazon-forecast-dataset-example.json
+  - type: Examples
+    url: examples/amazon-forecast-dataset-group-example.json
+  - type: Examples
+    url: examples/amazon-forecast-predictor-example.json
+  - type: Examples
+    url: examples/amazon-forecast-forecast-example.json
+  - type: Examples
+    url: examples/amazon-forecast-tag-example.json
+  - type: GettingStarted
+    url: https://aws.amazon.com/forecast/getting-started/
+  - type: Pricing
+    url: https://aws.amazon.com/forecast/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/forecast/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/forecast/latest/dg/API_Operations.html
+- aid: amazon-forecast:amazon-forecast-export-jobs-api
+  name: Amazon Forecast Export Jobs API
+  description: Forecast data export to S3
+  humanURL: https://aws.amazon.com/forecast/
+  baseURL: https://forecast.amazonaws.com
+  tags:
+  - Export Jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-forecast-export-jobs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/forecast/latest/dg/what-is-forecast.html
+  - type: JSONSchema
+    url: json-schema/amazon-forecast-dataset-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-forecast-predictor-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-forecast-forecast-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-forecast-dataset-group-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-forecast-tag-schema.json
+  - type: JSONStructure
+    url: json-structure/amazon-forecast-dataset-structure.json
+  - type: JSONStructure
+    url: json-structure/amazon-forecast-predictor-structure.json
+  - type: JSONStructure
+    url: json-structure/amazon-forecast-forecast-structure.json
+  - type: JSONStructure
+    url: json-structure/amazon-forecast-dataset-group-structure.json
+  - type: JSONStructure
+    url: json-structure/amazon-forecast-tag-structure.json
+  - type: Examples
+    url: examples/amazon-forecast-dataset-example.json
+  - type: Examples
+    url: examples/amazon-forecast-dataset-group-example.json
+  - type: Examples
+    url: examples/amazon-forecast-predictor-example.json
+  - type: Examples
+    url: examples/amazon-forecast-forecast-example.json
+  - type: Examples
+    url: examples/amazon-forecast-tag-example.json
+  - type: GettingStarted
+    url: https://aws.amazon.com/forecast/getting-started/
+  - type: Pricing
+    url: https://aws.amazon.com/forecast/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/forecast/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/forecast/latest/dg/API_Operations.html
+- aid: amazon-forecast:amazon-forecast-forecasts-api
+  name: Amazon Forecast Forecasts API
+  description: Generated forecast outputs
+  humanURL: https://aws.amazon.com/forecast/
+  baseURL: https://forecast.amazonaws.com
+  tags:
+  - Forecasts
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-forecast-forecasts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/forecast/latest/dg/what-is-forecast.html
+  - type: JSONSchema
+    url: json-schema/amazon-forecast-dataset-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-forecast-predictor-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-forecast-forecast-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-forecast-dataset-group-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-forecast-tag-schema.json
+  - type: JSONStructure
+    url: json-structure/amazon-forecast-dataset-structure.json
+  - type: JSONStructure
+    url: json-structure/amazon-forecast-predictor-structure.json
+  - type: JSONStructure
+    url: json-structure/amazon-forecast-forecast-structure.json
+  - type: JSONStructure
+    url: json-structure/amazon-forecast-dataset-group-structure.json
+  - type: JSONStructure
+    url: json-structure/amazon-forecast-tag-structure.json
+  - type: Examples
+    url: examples/amazon-forecast-dataset-example.json
+  - type: Examples
+    url: examples/amazon-forecast-dataset-group-example.json
+  - type: Examples
+    url: examples/amazon-forecast-predictor-example.json
+  - type: Examples
+    url: examples/amazon-forecast-forecast-example.json
+  - type: Examples
+    url: examples/amazon-forecast-tag-example.json
+  - type: GettingStarted
+    url: https://aws.amazon.com/forecast/getting-started/
+  - type: Pricing
+    url: https://aws.amazon.com/forecast/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/forecast/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/forecast/latest/dg/API_Operations.html
+- aid: amazon-forecast:amazon-forecast-predictors-api
+  name: Amazon Forecast Predictors API
+  description: ML models trained on dataset groups
+  humanURL: https://aws.amazon.com/forecast/
+  baseURL: https://forecast.amazonaws.com
+  tags:
+  - Predictors
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-forecast-predictors-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/forecast/latest/dg/what-is-forecast.html
+  - type: JSONSchema
+    url: json-schema/amazon-forecast-dataset-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-forecast-predictor-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-forecast-forecast-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-forecast-dataset-group-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-forecast-tag-schema.json
+  - type: JSONStructure
+    url: json-structure/amazon-forecast-dataset-structure.json
+  - type: JSONStructure
+    url: json-structure/amazon-forecast-predictor-structure.json
+  - type: JSONStructure
+    url: json-structure/amazon-forecast-forecast-structure.json
+  - type: JSONStructure
+    url: json-structure/amazon-forecast-dataset-group-structure.json
+  - type: JSONStructure
+    url: json-structure/amazon-forecast-tag-structure.json
+  - type: Examples
+    url: examples/amazon-forecast-dataset-example.json
+  - type: Examples
+    url: examples/amazon-forecast-dataset-group-example.json
+  - type: Examples
+    url: examples/amazon-forecast-predictor-example.json
+  - type: Examples
+    url: examples/amazon-forecast-forecast-example.json
+  - type: Examples
+    url: examples/amazon-forecast-tag-example.json
+  - type: GettingStarted
+    url: https://aws.amazon.com/forecast/getting-started/
+  - type: Pricing
+    url: https://aws.amazon.com/forecast/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/forecast/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/forecast/latest/dg/API_Operations.html
+- aid: amazon-forecast:amazon-forecast-tags-api
+  name: Amazon Forecast Tags API
+  description: Resource metadata labels
+  humanURL: https://aws.amazon.com/forecast/
+  baseURL: https://forecast.amazonaws.com
+  tags:
+  - Tags
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-forecast-tags-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/forecast/latest/dg/what-is-forecast.html
+  - type: JSONSchema
+    url: json-schema/amazon-forecast-dataset-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-forecast-predictor-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-forecast-forecast-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-forecast-dataset-group-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-forecast-tag-schema.json
+  - type: JSONStructure
+    url: json-structure/amazon-forecast-dataset-structure.json
+  - type: JSONStructure
+    url: json-structure/amazon-forecast-predictor-structure.json
+  - type: JSONStructure
+    url: json-structure/amazon-forecast-forecast-structure.json
+  - type: JSONStructure
+    url: json-structure/amazon-forecast-dataset-group-structure.json
+  - type: JSONStructure
+    url: json-structure/amazon-forecast-tag-structure.json
+  - type: Examples
+    url: examples/amazon-forecast-dataset-example.json
+  - type: Examples
+    url: examples/amazon-forecast-dataset-group-example.json
+  - type: Examples
+    url: examples/amazon-forecast-predictor-example.json
+  - type: Examples
+    url: examples/amazon-forecast-forecast-example.json
+  - type: Examples
+    url: examples/amazon-forecast-tag-example.json
+  - type: GettingStarted
+    url: https://aws.amazon.com/forecast/getting-started/
+  - type: Pricing
+    url: https://aws.amazon.com/forecast/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/forecast/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/forecast/latest/dg/API_Operations.html
 common:
   - type: AgenticAccess
     url: agentic-access/amazon-forecast-agentic-access.yml
