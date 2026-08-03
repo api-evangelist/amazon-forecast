@@ -1,0 +1,24 @@
+{
+  "provider": "amazon-forecast",
+  "sources": [
+    "amazon-forecast-dataset-groups-api-openapi.yml",
+    "amazon-forecast-datasets-api-openapi.yml",
+    "amazon-forecast-export-jobs-api-openapi.yml",
+    "amazon-forecast-forecasts-api-openapi.yml",
+    "amazon-forecast-predictors-api-openapi.yml",
+    "amazon-forecast-tags-api-openapi.yml"
+  ],
+  "outputs": [
+    "amazon-forecast-dataset-groups-api-openapi.yml",
+    "amazon-forecast-datasets-api-openapi.yml",
+    "amazon-forecast-export-jobs-api-openapi.yml",
+    "amazon-forecast-forecasts-api-openapi.yml",
+    "amazon-forecast-predictors-api-openapi.yml",
+    "amazon-forecast-tags-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
