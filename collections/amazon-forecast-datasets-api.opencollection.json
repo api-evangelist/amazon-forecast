@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Forecast Dataset Groups Datasets API",
+    "version": "2018-06-26"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Datasets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Datasets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://forecast.{region}.amazonaws.com/datasets",
+            "params": [
+              {
+                "name": "maxResults",
+                "value": "",
+                "type": "query",
+                "description": "Maximum results to return."
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token."
+              }
+            ]
+          },
+          "docs": "Returns a list of datasets created using CreateDataset."
+        },
+        {
+          "info": {
+            "name": "Create Dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://forecast.{region}.amazonaws.com/datasets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an Amazon Forecast dataset."
+        },
+        {
+          "info": {
+            "name": "Describe Dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://forecast.{region}.amazonaws.com/describe/dataset/:datasetArn",
+            "params": [
+              {
+                "name": "datasetArn",
+                "value": "",
+                "type": "path",
+                "description": "ARN of the dataset."
+              }
+            ]
+          },
+          "docs": "Describes an Amazon Forecast dataset."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

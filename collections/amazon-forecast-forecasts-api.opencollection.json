@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Forecast Dataset Groups Forecasts API",
+    "version": "2018-06-26"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Forecasts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Forecasts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://forecast.{region}.amazonaws.com/forecasts",
+            "params": [
+              {
+                "name": "maxResults",
+                "value": "",
+                "type": "query",
+                "description": "Maximum results."
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token."
+              }
+            ]
+          },
+          "docs": "Returns a list of forecasts."
+        },
+        {
+          "info": {
+            "name": "Create Forecast",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://forecast.{region}.amazonaws.com/forecasts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a forecast for each item in the TARGET_TIME_SERIES dataset."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

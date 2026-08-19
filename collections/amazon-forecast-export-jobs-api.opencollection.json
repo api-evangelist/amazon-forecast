@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Forecast Dataset Groups Export Jobs API",
+    "version": "2018-06-26"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Export Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Forecast Export Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://forecast.{region}.amazonaws.com/forecast-export-jobs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Exports a forecast created by CreateForecast to your Amazon S3 bucket."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
