@@ -22,6 +22,12 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/amazon-for
 tags:
   - AWS
   - Forecasting
+  - Machine-Learning
+  - Predictive Analytics
+  - Time Series
+tags_raw:
+  - AWS
+  - Forecasting
   - Machine Learning
   - Predictive Analytics
   - Time Series
@@ -186,6 +192,8 @@ apis:
   humanURL: https://aws.amazon.com/forecast/
   baseURL: https://forecast.amazonaws.com
   tags:
+  - Forecast
+  tags_raw:
   - Forecasts
   properties:
   - type: OpenAPI
