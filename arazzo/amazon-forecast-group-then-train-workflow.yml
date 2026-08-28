@@ -13,8 +13,11 @@ info:
     OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: amazonForecastApi
-  url: ../openapi/amazon-forecast-openapi.yml
+- name: datasetGroupsApi
+  url: ../openapi/amazon-forecast-dataset-groups-api-openapi.yml
+  type: openapi
+- name: predictorsApi
+  url: ../openapi/amazon-forecast-predictors-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: group-then-train

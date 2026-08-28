@@ -12,8 +12,11 @@ info:
     read and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: amazonForecastApi
-  url: ../openapi/amazon-forecast-openapi.yml
+- name: predictorsApi
+  url: ../openapi/amazon-forecast-predictors-api-openapi.yml
+  type: openapi
+- name: tagsApi
+  url: ../openapi/amazon-forecast-tags-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: train-predictor

@@ -12,8 +12,14 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: amazonForecastApi
-  url: ../openapi/amazon-forecast-openapi.yml
+- name: exportJobsApi
+  url: ../openapi/amazon-forecast-export-jobs-api-openapi.yml
+  type: openapi
+- name: forecastsApi
+  url: ../openapi/amazon-forecast-forecasts-api-openapi.yml
+  type: openapi
+- name: tagsApi
+  url: ../openapi/amazon-forecast-tags-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: export-forecast
