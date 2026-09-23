@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Amazon Forecast Dataset Groups Predictors API
+  title: Amazon Forecast Predictors API
   description: Amazon Forecast is a fully managed service that uses machine learning to deliver highly accurate time-series forecasts.
   version: '2018-06-26'
   contact:
@@ -120,6 +120,14 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Forecast API.
+      properties:
+        Message:
+          type: string
+        Code:
+          type: string
     PredictorSummary:
       type: object
       description: Summary of an Amazon Forecast predictor.
@@ -136,6 +144,17 @@ components:
         LastModificationTime:
           type: string
           format: date-time
+    Tag:
+      type: object
+      description: A metadata label applied to a Forecast resource.
+      properties:
+        Key:
+          type: string
+        Value:
+          type: string
+      required:
+      - Key
+      - Value
     CreatePredictorRequest:
       type: object
       required:
@@ -166,25 +185,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Tag'
-    ErrorResponse:
-      type: object
-      description: Standard error response from the Amazon Forecast API.
-      properties:
-        Message:
-          type: string
-        Code:
-          type: string
-    Tag:
-      type: object
-      description: A metadata label applied to a Forecast resource.
-      properties:
-        Key:
-          type: string
-        Value:
-          type: string
-      required:
-      - Key
-      - Value
   securitySchemes:
     awsSigV4:
       type: apiKey

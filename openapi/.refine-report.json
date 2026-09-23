@@ -1,12 +1,7 @@
 {
   "provider": "amazon-forecast",
   "sources": [
-    "amazon-forecast-dataset-groups-api-openapi.yml",
-    "amazon-forecast-datasets-api-openapi.yml",
-    "amazon-forecast-export-jobs-api-openapi.yml",
-    "amazon-forecast-forecasts-api-openapi.yml",
-    "amazon-forecast-predictors-api-openapi.yml",
-    "amazon-forecast-tags-api-openapi.yml"
+    "_original/amazon-forecast-openapi.yml"
   ],
   "outputs": [
     "amazon-forecast-dataset-groups-api-openapi.yml",
@@ -20,7 +15,16 @@
   "errors": [],
   "warnings": [],
   "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "amazon-forecast-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "amazon-forecast-dataset-groups-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-forecast-datasets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-forecast-export-jobs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-forecast-forecasts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-forecast-predictors-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-forecast-tags-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

@@ -120,6 +120,32 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    CreateDatasetGroupRequest:
+      type: object
+      required:
+      - DatasetGroupName
+      - Domain
+      properties:
+        DatasetGroupName:
+          type: string
+        Domain:
+          type: string
+        DatasetArns:
+          type: array
+          items:
+            type: string
+        Tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Forecast API.
+      properties:
+        Message:
+          type: string
+        Code:
+          type: string
     DatasetGroupSummary:
       type: object
       description: Summary of an Amazon Forecast dataset group.
@@ -149,32 +175,6 @@ components:
       required:
       - Key
       - Value
-    ErrorResponse:
-      type: object
-      description: Standard error response from the Amazon Forecast API.
-      properties:
-        Message:
-          type: string
-        Code:
-          type: string
-    CreateDatasetGroupRequest:
-      type: object
-      required:
-      - DatasetGroupName
-      - Domain
-      properties:
-        DatasetGroupName:
-          type: string
-        Domain:
-          type: string
-        DatasetArns:
-          type: array
-          items:
-            type: string
-        Tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/Tag'
   securitySchemes:
     awsSigV4:
       type: apiKey

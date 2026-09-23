@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Amazon Forecast Dataset Groups Export Jobs API
+  title: Amazon Forecast Export Jobs API
   description: Amazon Forecast is a fully managed service that uses machine learning to deliver highly accurate time-series forecasts.
   version: '2018-06-26'
   contact:
@@ -65,6 +65,14 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Forecast API.
+      properties:
+        Message:
+          type: string
+        Code:
+          type: string
     CreateForecastExportJobRequest:
       type: object
       required:
@@ -93,14 +101,6 @@ components:
       required:
       - Key
       - Value
-    ErrorResponse:
-      type: object
-      description: Standard error response from the Amazon Forecast API.
-      properties:
-        Message:
-          type: string
-        Code:
-          type: string
   securitySchemes:
     awsSigV4:
       type: apiKey

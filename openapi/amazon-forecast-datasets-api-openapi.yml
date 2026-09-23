@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Amazon Forecast Dataset Groups Datasets API
+  title: Amazon Forecast Datasets API
   description: Amazon Forecast is a fully managed service that uses machine learning to deliver highly accurate time-series forecasts.
   version: '2018-06-26'
   contact:
@@ -175,6 +175,36 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Forecast API.
+      properties:
+        Message:
+          type: string
+        Code:
+          type: string
+    CreateDatasetRequest:
+      type: object
+      required:
+      - DatasetName
+      - Domain
+      - DatasetType
+      - Schema
+      properties:
+        DatasetName:
+          type: string
+        Domain:
+          type: string
+        DatasetType:
+          type: string
+        DataFrequency:
+          type: string
+        Schema:
+          type: object
+        Tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
     DatasetSummary:
       type: object
       description: Summary of an Amazon Forecast dataset.
@@ -251,36 +281,6 @@ components:
       required:
       - Key
       - Value
-    ErrorResponse:
-      type: object
-      description: Standard error response from the Amazon Forecast API.
-      properties:
-        Message:
-          type: string
-        Code:
-          type: string
-    CreateDatasetRequest:
-      type: object
-      required:
-      - DatasetName
-      - Domain
-      - DatasetType
-      - Schema
-      properties:
-        DatasetName:
-          type: string
-        Domain:
-          type: string
-        DatasetType:
-          type: string
-        DataFrequency:
-          type: string
-        Schema:
-          type: object
-        Tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/Tag'
   securitySchemes:
     awsSigV4:
       type: apiKey
