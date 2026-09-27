@@ -120,14 +120,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      description: Standard error response from the Amazon Forecast API.
-      properties:
-        Message:
-          type: string
-        Code:
-          type: string
     PredictorSummary:
       type: object
       description: Summary of an Amazon Forecast predictor.
@@ -144,17 +136,6 @@ components:
         LastModificationTime:
           type: string
           format: date-time
-    Tag:
-      type: object
-      description: A metadata label applied to a Forecast resource.
-      properties:
-        Key:
-          type: string
-        Value:
-          type: string
-      required:
-      - Key
-      - Value
     CreatePredictorRequest:
       type: object
       required:
@@ -185,6 +166,25 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Tag'
+    Tag:
+      type: object
+      description: A metadata label applied to a Forecast resource.
+      properties:
+        Key:
+          type: string
+        Value:
+          type: string
+      required:
+      - Key
+      - Value
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Forecast API.
+      properties:
+        Message:
+          type: string
+        Code:
+          type: string
   securitySchemes:
     awsSigV4:
       type: apiKey

@@ -35,7 +35,7 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/amazon-for
 tags:
   - AWS
   - Forecasting
-  - Machine-Learning
+  - Machine Learning
   - Predictive Analytics
   - Time Series
 tags_raw:
@@ -44,6 +44,7 @@ tags_raw:
   - Machine Learning
   - Predictive Analytics
   - Time Series
+  - Machine-Learning
 url: https://raw.githubusercontent.com/api-evangelist/amazon-forecast/refs/heads/main/apis.yml
 created: '2026-03-16'
 modified: '2026-05-19'
@@ -484,5 +485,5 @@ integrations:
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
-x-parent: aws
+x-parent: amazon-web-services
 x-relationship: product
