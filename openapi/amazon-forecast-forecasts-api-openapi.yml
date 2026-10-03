@@ -128,6 +128,24 @@ components:
           type: string
         Code:
           type: string
+    CreateForecastRequest:
+      type: object
+      required:
+      - ForecastName
+      - PredictorArn
+      properties:
+        ForecastName:
+          type: string
+        PredictorArn:
+          type: string
+        ForecastTypes:
+          type: array
+          items:
+            type: string
+        Tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
     Tag:
       type: object
       description: A metadata label applied to a Forecast resource.
@@ -159,24 +177,6 @@ components:
         LastModificationTime:
           type: string
           format: date-time
-    CreateForecastRequest:
-      type: object
-      required:
-      - ForecastName
-      - PredictorArn
-      properties:
-        ForecastName:
-          type: string
-        PredictorArn:
-          type: string
-        ForecastTypes:
-          type: array
-          items:
-            type: string
-        Tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/Tag'
   securitySchemes:
     awsSigV4:
       type: apiKey
