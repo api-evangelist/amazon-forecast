@@ -353,6 +353,9 @@ apis:
   - type: APIReference
     url: https://docs.aws.amazon.com/forecast/latest/dg/API_Operations.html
 common:
+  - type: CapabilityMap
+    url: capabilities/amazon-forecast-capability-edges.yml
+    name: Amazon Forecast Business Capability Map
   - type: AgenticAccess
     url: agentic-access/amazon-forecast-agentic-access.yml
   - type: TrustCenter
