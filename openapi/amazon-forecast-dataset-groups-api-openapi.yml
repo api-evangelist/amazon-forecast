@@ -138,17 +138,6 @@ components:
         LastModificationTime:
           type: string
           format: date-time
-    Tag:
-      type: object
-      description: A metadata label applied to a Forecast resource.
-      properties:
-        Key:
-          type: string
-        Value:
-          type: string
-      required:
-      - Key
-      - Value
     CreateDatasetGroupRequest:
       type: object
       required:
@@ -167,6 +156,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Tag'
+    Tag:
+      type: object
+      description: A metadata label applied to a Forecast resource.
+      properties:
+        Key:
+          type: string
+        Value:
+          type: string
+      required:
+      - Key
+      - Value
     ErrorResponse:
       type: object
       description: Standard error response from the Amazon Forecast API.

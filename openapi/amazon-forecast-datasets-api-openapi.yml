@@ -175,26 +175,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    DatasetSummary:
-      type: object
-      description: Summary of an Amazon Forecast dataset.
-      properties:
-        DatasetArn:
-          type: string
-        DatasetName:
-          type: string
-        DatasetType:
-          type: string
-        Domain:
-          type: string
-        Status:
-          type: string
-        CreationTime:
-          type: string
-          format: date-time
-        LastModificationTime:
-          type: string
-          format: date-time
     CreateDatasetRequest:
       type: object
       required:
@@ -262,14 +242,26 @@ components:
       - Domain
       - DatasetType
       - Schema
-    ErrorResponse:
+    DatasetSummary:
       type: object
-      description: Standard error response from the Amazon Forecast API.
+      description: Summary of an Amazon Forecast dataset.
       properties:
-        Message:
+        DatasetArn:
           type: string
-        Code:
+        DatasetName:
           type: string
+        DatasetType:
+          type: string
+        Domain:
+          type: string
+        Status:
+          type: string
+        CreationTime:
+          type: string
+          format: date-time
+        LastModificationTime:
+          type: string
+          format: date-time
     Tag:
       type: object
       description: A metadata label applied to a Forecast resource.
@@ -281,6 +273,14 @@ components:
       required:
       - Key
       - Value
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Forecast API.
+      properties:
+        Message:
+          type: string
+        Code:
+          type: string
   securitySchemes:
     awsSigV4:
       type: apiKey
