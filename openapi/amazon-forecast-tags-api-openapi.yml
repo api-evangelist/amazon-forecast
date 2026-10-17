@@ -114,6 +114,14 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Forecast API.
+      properties:
+        Message:
+          type: string
+        Code:
+          type: string
     Tag:
       type: object
       description: A metadata label applied to a Forecast resource.
@@ -125,14 +133,6 @@ components:
       required:
       - Key
       - Value
-    ErrorResponse:
-      type: object
-      description: Standard error response from the Amazon Forecast API.
-      properties:
-        Message:
-          type: string
-        Code:
-          type: string
   securitySchemes:
     awsSigV4:
       type: apiKey

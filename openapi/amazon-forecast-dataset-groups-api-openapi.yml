@@ -120,24 +120,17 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    DatasetGroupSummary:
+    Tag:
       type: object
-      description: Summary of an Amazon Forecast dataset group.
+      description: A metadata label applied to a Forecast resource.
       properties:
-        DatasetGroupArn:
+        Key:
           type: string
-        DatasetGroupName:
+        Value:
           type: string
-        Domain:
-          type: string
-        Status:
-          type: string
-        CreationTime:
-          type: string
-          format: date-time
-        LastModificationTime:
-          type: string
-          format: date-time
+      required:
+      - Key
+      - Value
     CreateDatasetGroupRequest:
       type: object
       required:
@@ -156,17 +149,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Tag'
-    Tag:
-      type: object
-      description: A metadata label applied to a Forecast resource.
-      properties:
-        Key:
-          type: string
-        Value:
-          type: string
-      required:
-      - Key
-      - Value
     ErrorResponse:
       type: object
       description: Standard error response from the Amazon Forecast API.
@@ -175,6 +157,24 @@ components:
           type: string
         Code:
           type: string
+    DatasetGroupSummary:
+      type: object
+      description: Summary of an Amazon Forecast dataset group.
+      properties:
+        DatasetGroupArn:
+          type: string
+        DatasetGroupName:
+          type: string
+        Domain:
+          type: string
+        Status:
+          type: string
+        CreationTime:
+          type: string
+          format: date-time
+        LastModificationTime:
+          type: string
+          format: date-time
   securitySchemes:
     awsSigV4:
       type: apiKey
