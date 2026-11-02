@@ -1,0 +1,200 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-28'
+method: searched
+source: https://aws.amazon.com/forecast/pricing/
+sources:
+- https://aws.amazon.com/forecast/pricing/
+provenance:
+  tool: engine/economics/harvest_pricing.py
+  run: 20261028T141238
+  grounding: every price_text was found verbatim in the fetched page text
+audience: developer-api
+pricing_basis: usage-other
+delivery:
+  delivery: managed
+  method: page
+  read: '2026-10-28'
+published: true
+note: AWS pay-as-you-go usage pricing with tiered rates for forecast data points and explanations; no
+  minimum fees or upfront commitments.
+plan_count: 12
+currency: USD
+plans:
+- name: Imported data
+  price_text: $0.088 per GB
+  price: 0.088
+  currency: USD
+  period: per-use
+  unit: GB imported
+- name: Training a predictor
+  price_text: $0.24 per hour
+  price: 0.24
+  currency: USD
+  period: per-use
+  unit: training hour
+- name: Generated forecast data points – first 100K
+  price_text: $2.00
+  price: 2.0
+  currency: USD
+  period: per-use
+  unit: per 1000 forecast data points
+- name: Generated forecast data points – next 900K
+  price_text: $0.80
+  price: 0.8
+  currency: USD
+  period: per-use
+  unit: per 1000 forecast data points
+- name: Generated forecast data points – next 49M
+  price_text: $0.20
+  price: 0.2
+  currency: USD
+  period: per-use
+  unit: per 1000 forecast data points
+- name: Generated forecast data points – over 50M
+  price_text: $0.02
+  price: 0.02
+  currency: USD
+  period: per-use
+  unit: per 1000 forecast data points
+- name: Legacy CreatePredictor API forecasts
+  price_text: $0.60 per 1,000 time series
+  price: 0.6
+  currency: USD
+  period: per-use
+  unit: per 1,000 time series per quantile
+- name: Forecast Explanations – first 50K
+  price_text: $2.00
+  price: 2.0
+  currency: USD
+  period: per-use
+  unit: per 1000 explanations
+- name: Forecast Explanations – next 950K
+  price_text: $0.80
+  price: 0.8
+  currency: USD
+  period: per-use
+  unit: per 1000 explanations
+- name: Forecast Explanations – next 9.9M
+  price_text: $0.25
+  price: 0.25
+  currency: USD
+  period: per-use
+  unit: per 1000 explanations
+- name: Forecast Explanations – over 10M
+  price_text: $0.15
+  price: 0.15
+  currency: USD
+  period: per-use
+  unit: per 1000 explanations
+- name: Free Tier
+  price_text: Get started for free
+  period: month
+  included_quota: up to 100,000 forecast data points per month; up to 10 GB of data storage per month;
+    and up to 10 hours of training per month (first two months)
+rate_limit_statements:
+- Each explainability job has a limit of 50 time series and 500 time points.
+x-canonical:
+  generated: '2026-11-01'
+  vocabulary: engine/economics/plans-canonical.yml
+  models:
+  - hybrid
+  - subscription
+  units:
+  - compute
+  - data
+  plans:
+  - name: Imported data
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - data
+    periods:
+    - other
+  - name: Training a predictor
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - other
+  - name: Generated forecast data points – first 100K
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
+  - name: Generated forecast data points – next 900K
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
+  - name: Generated forecast data points – next 49M
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
+  - name: Generated forecast data points – over 50M
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
+  - name: Legacy CreatePredictor API forecasts
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
+  - name: Forecast Explanations – first 50K
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
+  - name: Forecast Explanations – next 950K
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
+  - name: Forecast Explanations – next 9.9M
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
+  - name: Forecast Explanations – over 10M
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
+  - name: Free Tier
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - month
