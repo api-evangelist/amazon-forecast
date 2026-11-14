@@ -38,6 +38,18 @@ artifacts:
   capabilities/amazon-forecast-capability-edges.yml:
     method: unknown
     evidence: no authorship recorded
+  certification/observations-2026-11-11.jsonl:
+    method: unknown
+    evidence: no authorship recorded
+  certification/status.yml:
+    method: unknown
+    evidence: no authorship recorded
+  changelog/amazon-forecast-changelog.yml:
+    method: searched
+    evidence: declared in the artifact
+  cli/amazon-forecast-cli.yml:
+    method: searched
+    evidence: declared in the artifact
   collections/amazon-forecast-dataset-groups-api.opencollection.json:
     method: derived
     evidence: openapi/amazon-forecast-dataset-groups-api
@@ -80,6 +92,21 @@ artifacts:
   collections/amazon-forecast.postman_collection.json:
     method: derived
     evidence: openapi/amazon-forecast
+  compliance/amazon-forecast-compliance.yml:
+    method: harvested
+    evidence: declared in the artifact
+  conformance/amazon-forecast-conformance.yml:
+    method: derived
+    evidence: declared in the artifact
+  conventions/amazon-forecast-conventions.yml:
+    method: derived
+    evidence: declared in the artifact
+  data-model/amazon-forecast-data-model.yml:
+    method: derived
+    evidence: declared in the artifact
+  errors/amazon-forecast-problem-types.yml:
+    method: derived
+    evidence: declared in the artifact
   examples/amazon-forecast-dataset-example.json:
     method: unknown
     evidence: no authorship recorded
@@ -101,6 +128,9 @@ artifacts:
   front-door-ai/2026-09-17.yml:
     method: unknown
     evidence: no authorship recorded
+  hosts/amazon-forecast-hosts.yml:
+    method: derived
+    evidence: declared in the artifact
   integrations/_index.yml:
     method: generated
     evidence: carries an API Evangelist house phrase
@@ -110,19 +140,199 @@ artifacts:
   json-ld/amazon-forecast-context.jsonld:
     method: unknown
     evidence: no authorship recorded
+  json-schema/amazon-forecast-create-auto-predictor-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-create-dataset-import-job-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-create-explainability-export-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-create-explainability-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-create-forecast-export-job-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-create-monitor-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-create-predictor-backtest-export-job-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-create-what-if-analysis-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-create-what-if-analysis-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-create-what-if-forecast-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
   json-schema/amazon-forecast-dataset-group-schema.json:
     method: unknown
     evidence: no authorship recorded
   json-schema/amazon-forecast-dataset-schema.json:
     method: unknown
     evidence: no authorship recorded
+  json-schema/amazon-forecast-delete-dataset-import-job-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-delete-explainability-export-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-delete-explainability-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-delete-forecast-export-job-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-delete-monitor-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-delete-predictor-backtest-export-job-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-delete-what-if-analysis-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-delete-what-if-forecast-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-describe-auto-predictor-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-describe-dataset-import-job-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-describe-dataset-import-job-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-describe-explainability-export-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-describe-explainability-export-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-describe-explainability-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-describe-explainability-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-describe-forecast-export-job-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-describe-forecast-export-job-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-describe-monitor-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-describe-monitor-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-describe-predictor-backtest-export-job-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-describe-predictor-backtest-export-job-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-describe-what-if-analysis-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-describe-what-if-analysis-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-describe-what-if-forecast-export-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-describe-what-if-forecast-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-describe-what-if-forecast-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
   json-schema/amazon-forecast-forecast-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-get-accuracy-metrics-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-list-dataset-import-jobs-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-list-dataset-import-jobs-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-list-explainabilities-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-list-explainabilities-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-list-explainability-exports-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-list-explainability-exports-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-list-forecast-export-jobs-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-list-forecast-export-jobs-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-list-monitor-evaluations-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-list-monitor-evaluations-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-list-monitors-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-list-monitors-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-list-predictor-backtest-export-jobs-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-list-predictor-backtest-export-jobs-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-list-what-if-analyses-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-list-what-if-forecast-exports-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-list-what-if-forecasts-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-list-what-if-forecasts-response-schema.json:
     method: unknown
     evidence: no authorship recorded
   json-schema/amazon-forecast-predictor-schema.json:
     method: unknown
     evidence: no authorship recorded
+  json-schema/amazon-forecast-stop-resource-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-tag-resource-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-tag-resource-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
   json-schema/amazon-forecast-tag-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-untag-resource-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-forecast-untag-resource-response-schema.json:
     method: unknown
     evidence: no authorship recorded
   json-structure/amazon-forecast-dataset-group-structure.json:
@@ -143,7 +353,7 @@ artifacts:
   kin/checks-2026-10-23T222754.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
-  kin/checks-2026-11-02T082323.yml:
+  kin/checks-2026-11-06T143934.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-09-23T000603.yml:
@@ -212,10 +422,21 @@ artifacts:
   kin/score-2026-11-02T082323.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
-  openapi/_original/amazon-forecast-openapi.yml:
-    method: harvested
-    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
-      to the provider's source is unverified
+  kin/score-2026-11-06T143934.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  lifecycle/amazon-forecast-lifecycle.yml:
+    method: searched
+    evidence: declared in the artifact
+  llms/amazon-forecast-llms-provenance.yml:
+    method: unknown
+    evidence: no authorship recorded
+  llms/amazon-forecast-llms.txt:
+    method: unknown
+    evidence: no authorship recorded
+  mcp/amazon-forecast-mcp.yml:
+    method: derived
+    evidence: declared in the artifact
   openapi/amazon-forecast-dataset-groups-api-openapi.yml:
     method: unknown
     evidence: no authorship recorded
@@ -267,16 +488,28 @@ artifacts:
   openapi/amazon-forecast-what-if-forecast-export-api-openapi.yml:
     method: unknown
     evidence: no authorship recorded
+  packages/amazon-forecast-packages.yml:
+    method: searched
+    evidence: declared in the artifact
+  patterns/amazon-forecast-patterns.yml:
+    method: derived
+    evidence: declared in the artifact
   plans/amazon-forecast-plans-pricing.yml:
     method: searched
     evidence: declared in the artifact
   postman/amazon-forecast.postman_collection.json:
     method: derived
     evidence: openapi/amazon-forecast
+  privacy/amazon-forecast-privacy-policy.yml:
+    method: harvested
+    evidence: declared in the artifact
   rate-limits/amazon-forecast-rate-limits.yml:
     method: generated
     evidence: declared in the artifact
   rules/amazon-forecast-jsonschema-spectral-rules.yml:
+    method: generated
+    evidence: declared in the artifact
+  rules/amazon-forecast-rules.yml:
     method: generated
     evidence: declared in the artifact
   rules/amazon-forecast-spectral-rules.yml:
@@ -295,8 +528,30 @@ artifacts:
     method: generated
     evidence: declared in the artifact
   smithy/forecast-2018-06-26.json:
+    method: harvested
+    evidence: byte-identical to https://raw.githubusercontent.com/aws/api-models-aws/3cd98287b471c106254abd89279cc87308d38bfd/models/forecast/service/2018-06-26/forecast-2018-06-26.json
+      (sha256 0e4f7f80f98d, fetched 2026-11-11T21:09:51+00:00)
+  terms/amazon-forecast-terms-of-service.yml:
+    method: harvested
+    evidence: declared in the artifact
+  vendors/amazon-forecast-vendors.yml:
     method: unknown
     evidence: no authorship recorded
   vocabulary/amazon-forecast-vocabulary.yaml:
+    method: unknown
+    evidence: no authorship recorded
+  vocabulary/amazon-forecast-vocabulary.yml:
+    method: derived
+    evidence: declared in the artifact
+  well-known/amazon-forecast-amazon-security.txt:
+    method: unknown
+    evidence: no authorship recorded
+  well-known/amazon-forecast-midway-auth-openid-configuration.json:
+    method: unknown
+    evidence: no authorship recorded
+  well-known/amazon-forecast-security.txt:
+    method: unknown
+    evidence: no authorship recorded
+  well-known/amazon-forecast-well-known.yml:
     method: unknown
     evidence: no authorship recorded
